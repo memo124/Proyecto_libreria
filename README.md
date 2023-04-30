@@ -1,10 +1,10 @@
-# Instalación de node_modulse
-
-Run `npm install` was generated necessary files
-
 # Libreria
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.3.
+
+## Instalación de node_module
+
+Run `npm install` was generated necessary files
 
 ## Development server
 
