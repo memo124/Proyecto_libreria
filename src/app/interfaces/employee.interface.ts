@@ -1,6 +1,6 @@
 export interface employeeI{
-  idemployee: number;
-  nameemployee: string;
-  employeenumber: string;
-  statusemployee: boolean;
+  idEmployee: number;
+  nameEmployee: string;
+  employeeNumber: string;
+  statusEmployee: boolean;
 }

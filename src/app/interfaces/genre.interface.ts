@@ -1,5 +1,5 @@
 export interface genreI{
-  idgenre: number;
-  namerack: string;
-  statusgenre: boolean;
+  idGenre: number;
+  nameGenre: string;
+  statusGenre: boolean;
 }

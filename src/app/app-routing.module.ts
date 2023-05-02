@@ -8,17 +8,20 @@ import { GenreComponent } from './pages/genre/genre.component';
 import { RackComponent } from './pages/rack/rack.component';
 import { ReserveComponent } from './pages/reserve/reserve.component';
 import { UserComponent } from './pages/user/user.component';
+import { AuthorComponent } from './pages/author/author.component';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
   {path:'login',component: LoginComponent},
-  {path:'books',component: BooksComponent},
+  {path:'book',component: BooksComponent},
   {path:'editorial',component: EditorialComponent},
   {path:'employee',component:EmployeeComponent},
   {path:'genre',component:GenreComponent},
   {path:'rack',component:RackComponent},
   {path:'reserve',component:ReserveComponent},
-  {path:'user',component:UserComponent}
+  {path:'user',component:UserComponent},
+  {path:'author',component:AuthorComponent}
 ];
 
 @NgModule({
@@ -26,5 +29,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [LoginComponent,BooksComponent,EditorialComponent,EmployeeComponent,GenreComponent,RackComponent,ReserveComponent,UserComponent]
+export const routingComponents = [LoginComponent,BooksComponent,AuthorComponent,EditorialComponent,EmployeeComponent,GenreComponent,RackComponent,ReserveComponent,UserComponent]
 

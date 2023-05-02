@@ -1,6 +1,6 @@
 export interface rackI{
-  idrack: number;
-  namerack: string;
+  idRack: number;
+  nameRack: string;
   levels: number;
-  statusrack: boolean;
+  statusRack: boolean;
 }

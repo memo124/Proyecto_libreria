@@ -1,4 +1,4 @@
 export interface loginI{
-  employee: string;
+  user: string;
   password: string;
 }

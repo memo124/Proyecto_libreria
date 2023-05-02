@@ -7,4 +7,15 @@ import { Component } from '@angular/core';
 })
 export class BooksComponent {
 
+  public menus: object = [
+    {option:"book"},
+    {option:"author"},
+    {option:"editorial"},
+    {option:"employee"},
+    {option:"genre"},
+    {option:"rack"},
+    {option:"reserve"},
+    {option:"user"}
+  ];
+
 }

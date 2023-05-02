@@ -1,12 +1,12 @@
 export interface booksI{
-  idbook: number;
-  bookname: string;
-  publicationdate: string;
-  totalpague: number;
-  quantitystock: number;
-  statusbook: boolean;
-  idauthor: number;
-  ideditorial: number;
-  idgenre: number;
-  idrack: number;
+  idBook: number;
+  bookName: string;
+  publicationDate: string;
+  totalPague: number;
+  quantityStock: number;
+  statusBook: boolean;
+  idAuthor: number;
+  idEditorial: number;
+  idGenre: number;
+  idRack: number;
 }

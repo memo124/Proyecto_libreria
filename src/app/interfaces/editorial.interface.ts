@@ -1,6 +1,6 @@
 export interface editorialI{
-  ideditorial: number;
-  nameeditorial: string;
-  dateadd: string;
-  statuseditorial: number;
+  idEditorial: number;
+  nameEditorial: string;
+  dateAdd: string;
+  statusEditorial: number;
 }

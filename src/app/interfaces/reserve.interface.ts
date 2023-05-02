@@ -1,7 +1,7 @@
 export interface reserveI{
-  idreservation: number;
-  statusreservation: boolean;
-  idbook: number;
-  idemployee: number;
-  iduser: number;
+  idReservation: number;
+  statusReservation: boolean;
+  idBook: number;
+  idEmployee: number;
+  idUser: number;
 }
