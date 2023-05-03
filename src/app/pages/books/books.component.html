@@ -24,7 +24,8 @@
             <button class="btn btn-outline-success"  data-bs-toggle="modal"
             data-bs-target="#modalBook">Edit</button>
             &nbsp;
-            <button class="btn btn-outline-success">Reserve</button>
+            <button class="btn btn-outline-success" data-bs-toggle="modal"
+            data-bs-target="#modalReserve">Reserve</button>
           </div>
         </div>
       </div>
@@ -83,57 +84,126 @@
   </div> -->
   </div>
 
-<div
+  <div
+  class="modal fade"
+  id="modalBook"
+  tabindex="-1"
+  aria-labelledby="modalBook"
+  aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg"
+      id="modalBook"
+      tabindex="-1"
+      aria-labelledby="modalBook"
+      aria-hidden="true">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div><i class="bx bxs-user me-1 font-2  2 text-info"></i>
+          </div>
+          <h5 class="mb-0 text-info">Books data</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col align-items-center">
+              <div *ngIf="previsualizacion" style="display: flex; justify-content: center;">
+                <img [src]="previsualizacion" src="{{img}}" alt="Admin" class="p-1 bg-success" width="250" height="250" id="inputGroupFileAddon04" >
+              </div>
+              <br>
+              <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" (change)="capturarFile($event)" formControlName="txtimg">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="nameTitle" class="form-label">Title:</label>
+              <input type="Text" class="form-control" id="nameTitle">
+            </div>
+            <div class="col">
+              <label for="dateAuthor" class="form-label">Author:</label>
+              <input type="date" class="form-control" id="dateAuthor">
+            </div>
+            <div class="col">
+              <label for="nameTitle" class="form-label">Genre:</label>
+              <input type="Text" class="form-control" id="nameTitle">
+            </div>
+            <div class="col">
+              <label for="dateAuthor" class="form-label">Editorial:</label>
+              <input type="date" class="form-control" id="dateAuthor">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="floatingTextarea2">Description:</label>
+              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
 class="modal fade"
-id="modalBook"
+id="modalReserve"
 tabindex="-1"
-aria-labelledby="modalBook"
+aria-labelledby="modalReserve"
 aria-hidden="true"
 >
   <div class="modal-dialog modal-lg"
-    id="modalBook"
+    id="modalReserve"
     tabindex="-1"
-    aria-labelledby="modalBook"
+    aria-labelledby="modalReserve"
     aria-hidden="true">
     <div class="modal-content">
       <div class="modal-header">
         <div><i class="bx bxs-user me-1 font-2  2 text-info"></i>
         </div>
-        <h5 class="mb-0 text-info">Books data</h5>
+        <h5 class="mb-0 text-info">Reserve Books</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="row">
-          <div class="col align-items-center">
-            <div *ngIf="previsualizacion" style="display: flex; justify-content: center;">
-              <img [src]="previsualizacion" src="{{img}}" alt="Admin" class="p-1 bg-success" width="250" height="250" id="inputGroupFileAddon04" >
+        <div class="row" style="padding: 15px;">
+          <div class="card">
+            <div class="row">
+              <div class="col-4">Title:</div>
+              <div class="col-4">Genre:</div>
             </div>
-            <br>
-					  <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" (change)="capturarFile($event)" formControlName="txtimg">
+            <div class="row">
+              <div class="col-4">Author:</div>
+              <div class="col-4">Editorial:</div>
+            </div>
+            <div class="row">
+              <div class="col-8">Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Molestiae magni
+                accusantium consequuntur optio dolore reprehenderit
+                quis iure a excepturi magnam perferendis mollitia facilis,
+                possimus autem voluptatum vero error! Eos, repudiandae?
+              </div>
+              <div class="col-4"><img src="assets/img/descarga.png" alt="" class="img-thumbnail"></div>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
-            <label for="nameTitle" class="form-label">Title:</label>
-            <input type="Text" class="form-control" id="nameTitle">
-          </div>
-          <div class="col">
-            <label for="dateAuthor" class="form-label">Author:</label>
-            <input type="date" class="form-control" id="dateAuthor">
-          </div>
-          <div class="col">
-            <label for="nameTitle" class="form-label">Genre:</label>
-            <input type="Text" class="form-control" id="nameTitle">
-          </div>
-          <div class="col">
-            <label for="dateAuthor" class="form-label">Editorial:</label>
-            <input type="date" class="form-control" id="dateAuthor">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <label for="floatingTextarea2">Description:</label>
-            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+        <div class="row" style="padding: 15px;">
+          <div class="card">
+            <div class="row">
+              <div class="col-4">
+                <label for="Carnet" class="form-label">Carnet:</label>
+                <input type="Text" class="form-control" id="Carnet">
+              </div>
+            </div>
+            <div class="row" style="padding-bottom: 15px;">
+              <div class="col-4">Name:</div>
+              <div class="col-4">Email:</div>
+              <div class="col-4">Phone:</div>
+            </div>
+            <div class="row" style="padding-bottom: 15px;">
+              <div class="col-4">Reservation date:</div>
+              <div class="col-4">Status:</div>
+            </div>
           </div>
         </div>
       </div>

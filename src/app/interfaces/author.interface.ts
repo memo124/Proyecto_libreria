@@ -1,7 +1,7 @@
 export interface authorI{
   idAuthor: number;
-  nameAuthor: string;
-  countryAuthor: string;
+  nameAuhtor: string;
+  countryBirth: string;
   dateBorn: string;
   statusAuthor: boolean;
 }

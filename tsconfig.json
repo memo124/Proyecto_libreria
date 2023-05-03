@@ -24,6 +24,11 @@
       "dom"
     ]
   },
+  "paths": {
+    "@app/env": [
+      "src/environments/environment"
+    ]
+  },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

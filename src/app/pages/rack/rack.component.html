@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-4">
           <button class="btn btn-primary" data-bs-toggle="modal"
-          data-bs-target="#modalRack">Agregar</button>
+          data-bs-target="#modalShelft">Add</button>
         </div>
         <div class="col-4">
           <input type="text" class="form-control" placeholder="Search for name">
@@ -31,12 +31,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>hola</td>
-              <td>hola</td>
-              <td>hola</td>
-              <td>hola</td>
-              <td>hola</td>
+            <tr *ngFor="let rack of racks">
+              <td>{{rack.idRack}}</td>
+              <td>{{rack.nameRack}}</td>
+              <td>{{rack.levels}}</td>
+              <td>{{rack.statusRack}}</td>
+              <td><a class="btn btn-warning"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
             </tr>
           </tbody>
         </table>
@@ -45,24 +45,24 @@
   </div>
 </div>
 
-<!-- Modal fade rack -->
+<!-- Modal fade Shelft -->
 <div
   class="modal fade"
-  id="modalRack"
+  id="modalShelft"
   tabindex="-1"
-  aria-labelledby="modalRack"
+  aria-labelledby="modalShelft"
   aria-hidden="true"
 >
   <div class="modal-dialog"
-    id="modalRack"
+    id="modalShelft"
     tabindex="-1"
-    aria-labelledby="modalRack"
+    aria-labelledby="modalShelft"
     aria-hidden="true">
     <div class="modal-content">
       <div class="modal-header">
         <div><i class="bx bxs-user me-1 font-22 text-info"></i>
         </div>
-        <h5 class="mb-0 text-info">Rack data</h5>
+        <h5 class="mb-0 text-info">Shelft data</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

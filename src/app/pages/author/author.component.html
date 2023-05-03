@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-4">
           <button class="btn btn-primary" data-bs-toggle="modal"
-          data-bs-target="#modalAuthor">Agregar</button>
+          data-bs-target="#modalAuthor">Add</button>
         </div>
         <div class="col-4">
           <input type="text" class="form-control" placeholder="Search for name">
@@ -33,13 +33,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>hola</td>
-              <td>hola</td>
-              <td>hola</td>
-              <td>hola</td>
-              <td>hola</td>
-              <td>hola</td>
+            <tr *ngFor="let author of authors; let i">
+              <td>{{author.idAuthor}}</td>
+              <td>{{author.nameAuhtor}}</td>
+              <td>{{author.countryBirth}}</td>
+              <td>{{author.dateBorn}}</td>
+              <td>{{author.statusAuthor}}</td>
+              <td><a class="btn btn-warning"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
             </tr>
           </tbody>
         </table>
@@ -80,8 +80,8 @@
         </div>
         <div class="row">
           <div class="col">
-            <label for="nameAuthor" class="form-label">Country:</label>
-            <input type="Text" class="form-control" id="nameAuthor">
+            <label for="coutry" class="form-label">Country:</label>
+            <input type="Text" class="form-control" id="coutry">
           </div>
           <div class="col">
             <label for="statusAuthor" class="form-label"

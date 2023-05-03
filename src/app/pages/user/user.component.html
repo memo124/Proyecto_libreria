@@ -6,7 +6,8 @@
     <div class="card radius-10" style="padding: 5px;">
       <div class="row">
         <div class="col-4">
-          <button class="btn btn-primary">Agregar</button>
+          <button class="btn btn-primary" data-bs-toggle="modal"
+          data-bs-target="#modalUser">Add</button>
         </div>
         <div class="col-4">
           <input type="text" class="form-control" placeholder="Search for name">
@@ -15,7 +16,6 @@
     </div>
   </div>
   <br>
-
   <div class="row align-items-center">
     <div class="card radius-10">
       <div class="card-body">
@@ -24,18 +24,22 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Name</th>
-              <th scope="col">Country</th>
-              <th scope="col">Date</th>
+              <th scope="col">Carnet</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
               <th scope="col">Status</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>hola</td>
-              <td>hola</td>
-              <td>hola</td>
-              <td>hola</td>
-              <td>hola</td>
+            <tr *ngFor="let user of users">
+              <td>{{user.idUser}}</td>
+              <td>{{user.nameUser}}</td>
+              <td>{{user.carnetUser}}</td>
+              <td>{{user.emailUser}}</td>
+              <td>{{user.phoneUser}}</td>
+              <td>{{user.statusUser}}</td>
+              <td><a class="btn btn-warning"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
             </tr>
           </tbody>
         </table>
@@ -43,6 +47,70 @@
     </div>
   </div>
 </div>
+
+<!-- Modal fade user -->
+<div
+  class="modal fade"
+  id="modalUser"
+  tabindex="-1"
+  aria-labelledby="modalUser"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg"
+    id="modalUser"
+    tabindex="-1"
+    aria-labelledby="modalUser"
+    aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div><i class="bx bxs-user me-1 font-22 text-info"></i>
+        </div>
+        <h5 class="mb-0 text-info">User data</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-3">
+            <label for="Carnet" class="form-label">Carnet:</label>
+            <input type="Text" class="form-control" id="Carnet">
+          </div>
+          <div class="col">
+            <label for="" class="form-label">Name:</label>
+            <input type="Text" class="form-control" id="Name">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="Email" class="form-label">Email:</label>
+            <input type="Text" class="form-control" id="Email">
+          </div>
+          <div class="col">
+            <label for="Number" class="form-label">Phone:</label>
+            <input type="Text" class="form-control" id="Number">
+          </div>
+          <div class="col">
+            <label for="statusAuthor" class="form-label"
+                >Status:</label
+              >
+            <select
+                class="form-select"
+                aria-label="Default select example"
+                formControlName="statusAuthor"
+              >
+                <option value="0" >Inactive</option>
+                <option value="1" >Active</option>
+              </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <app-footer></app-footer>
