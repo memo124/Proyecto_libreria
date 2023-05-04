@@ -1,27 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { booksI } from 'src/app/interfaces/books.interface';
+import { BooksService } from 'src/app/services/books/books.service';
 
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html',
   styleUrls: ['./books.component.css']
 })
-export class BooksComponent {
+export class BooksComponent implements OnInit {
 
-  constructor(private sanitizer: DomSanitizer) {
+  public books: booksI[] = [];
+  public p: number = 1;
+  constructor(private sanitizer: DomSanitizer, private bookS:BooksService) {
 
   }
 
-  public menus: object = [
-    {option:"book"},
-    {option:"author"},
-    {option:"editorial"},
-    {option:"employee"},
-    {option:"genre"},
-    {option:"rack"},
-    {option:"reserve"},
-    {option:"user"}
-  ];
+  ngOnInit(): void {
+    this.bookS.getBooks().subscribe(data=>{
+      this.books = data
+    })
+  }
+
 
   public previsualizacion?: string;
   public archivos: any = [];

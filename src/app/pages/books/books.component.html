@@ -2,24 +2,20 @@
 
 <!-- <div class="row"> -->
   <div class="container">
-    <div class="row" style="padding-bottom: 5px;">
-      <div class="card">
+    <div class="row" *ngFor="let book of books | paginate : { itemsPerPage: 5, currentPage: p };">
+      <div class="card description" >
         <div class="row">
-          <div class="col-4">Title:</div>
-          <div class="col-4">Genre:</div>
+          <div class="col-4">Title:{{book.bookName}}</div>
+          <div class="col-4">Genre:{{book.Genre.nameGenre}}</div>
         </div>
         <div class="row">
-          <div class="col-4">Author:</div>
-          <div class="col-4">Editorial:</div>
+          <div class="col-4">Author:{{book.Author.nameAuthor}}</div>
+          <div class="col-4">Editorial:{{book.Editorial.nameEditorial}}</div>
         </div>
         <div class="row">
-          <div class="col-8">Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Molestiae magni
-            accusantium consequuntur optio dolore reprehenderit
-            quis iure a excepturi magnam perferendis mollitia facilis,
-            possimus autem voluptatum vero error! Eos, repudiandae?
+          <div class="col-8">{{book.bookCover}}
           </div>
-          <div class="col-2"><img src="assets/img/descarga.png" alt="" class="img-thumbnail"></div>
+          <div class="col-2"><img src="assets/img/descarga.png" alt="" class="img-thumbnail imagen"></div>
           <div class="col-2">
             <button class="btn btn-outline-success"  data-bs-toggle="modal"
             data-bs-target="#modalBook">Edit</button>
@@ -30,59 +26,14 @@
         </div>
       </div>
     </div>
-    <!-- División -->
-  <!-- <div class="row" style="padding-bottom: 5px;">
-    <div class="card">
-      <div class="row">
-        <div class="col-4">Title:</div>
-        <div class="col-4">Genre:</div>
-      </div>
-      <div class="row">
-        <div class="col-4">Author:</div>
-        <div class="col-4">Editorial:</div>
-      </div>
-      <div class="row">
-        <div class="col-8">Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Molestiae magni
-          accusantium consequuntur optio dolore reprehenderit
-          quis iure a excepturi magnam perferendis mollitia facilis,
-          possimus autem voluptatum vero error! Eos, repudiandae?
-        </div>
-        <div class="col-2"><img src="assets/img/descarga.png" alt="" class="img-thumbnail"></div>
-        <div class="col-2">
-          <button class="btn btn-outline-success">Edit</button>
-          <button class="btn btn-outline-success">Reserve</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <!-- División -->
-  <!-- <div class="row" style="padding-bottom: 5px;">
-    <div class="card">
-      <div class="row">
-        <div class="col-4">Title:</div>
-        <div class="col-4">Genre:</div>
-      </div>
-      <div class="row">
-        <div class="col-4">Author:</div>
-        <div class="col-4">Editorial:</div>
-      </div>
-      <div class="row">
-        <div class="col-8">Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Molestiae magni
-          accusantium consequuntur optio dolore reprehenderit
-          quis iure a excepturi magnam perferendis mollitia facilis,
-          possimus autem voluptatum vero error! Eos, repudiandae?
-        </div>
-        <div class="col-2"><img src="assets/img/descarga.png" alt="" class="img-thumbnail"></div>
-        <div class="col-2">
-          <button class="btn btn-outline-success">Edit</button>
-          <button class="btn btn-outline-success">Reserve</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
+    <pagination-controls
+      (pageChange)="p = $event"
+      previousLabel="Before"
+      nextLabel="After"
+    ></pagination-controls>
   </div>
+
+<!-- Modal Book -->
 
   <div
   class="modal fade"
@@ -145,7 +96,7 @@
       </div>
     </div>
   </div>
-
+<!-- Modal reserve -->
   <div
 class="modal fade"
 id="modalReserve"
@@ -183,7 +134,7 @@ aria-hidden="true"
                 quis iure a excepturi magnam perferendis mollitia facilis,
                 possimus autem voluptatum vero error! Eos, repudiandae?
               </div>
-              <div class="col-4"><img src="assets/img/descarga.png" alt="" class="img-thumbnail"></div>
+              <div class="col-4"><img src="assets/img/descarga.png" alt="" class="img-thumbnail imagen"></div>
             </div>
           </div>
         </div>
