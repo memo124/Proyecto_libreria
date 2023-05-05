@@ -8,7 +8,7 @@ import { AuthorService } from 'src/app/services/author/author.service';
 })
 export class AuthorComponent implements OnInit {
   public authors: authorI[] = [];
-
+  public filterName: string = "";
   constructor(public authorS:AuthorService){
 
   }

@@ -10,6 +10,7 @@ import { GenreService } from 'src/app/services/genre/genre.service';
 export class GenreComponent implements OnInit {
 
   public genres: genreI[] = [];
+  public filterName: string = "";
 
   constructor(public genreS:GenreService){}
 

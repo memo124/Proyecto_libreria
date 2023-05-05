@@ -10,6 +10,7 @@ import { RackService } from 'src/app/services/rack/rack.service';
 export class RackComponent implements OnInit {
 
   public racks: rackI[] = [];
+  public filterName: string = "";
 
   constructor(public rackS:RackService){}
 

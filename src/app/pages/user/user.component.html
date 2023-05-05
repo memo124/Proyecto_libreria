@@ -10,7 +10,7 @@
           data-bs-target="#modalUser">Add</button>
         </div>
         <div class="col-4">
-          <input type="text" class="form-control" placeholder="Search for name">
+          <input type="text" class="form-control" placeholder="Search for name" [(ngModel)]="filterName">
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let user of users">
+            <tr *ngFor="let user of users | user:filterName">
               <td>{{user.idUser}}</td>
               <td>{{user.nameUser}}</td>
               <td>{{user.carnetUser}}</td>

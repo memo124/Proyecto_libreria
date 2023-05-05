@@ -9,7 +9,7 @@
           <button class="btn btn-primary">Add</button>
         </div>
         <div class="col-4">
-          <input type="text" class="form-control" placeholder="Search for name">
+          <input type="text" class="form-control" placeholder="Search for user name" [(ngModel)]="filterName">
         </div>
       </div>
     </div>
@@ -23,7 +23,7 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Name</th>
+              <th scope="col">Name user</th>
               <th scope="col">Reservation date</th>
               <th scope="col">Book</th>
               <th scope="col">Status</th>
@@ -31,13 +31,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>hola</td>
-              <td>hola</td>
-              <td>hola</td>
-              <td>hola</td>
-              <td>hola</td>
-              <td>hola</td>
+            <tr *ngFor="let reserve of reserves | reserve:filterName">
+              <td>{{reserve.idReserve}}</td>
+              <td>{{reserve.User.nameUser}}</td>
+              <td>{{reserve.dateReservation | date:'dd-MM-yyyy'}}</td>
+              <td>{{reserve.Book.bookName}}</td>
+              <td>{{reserve.statusReserve}}</td>
+              <td><a class="btn btn-warning"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
             </tr>
           </tbody>
         </table>

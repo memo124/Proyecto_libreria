@@ -10,7 +10,7 @@ import { EditorialService } from 'src/app/services/editorial/editorial.service';
 export class EditorialComponent implements OnInit {
 
   public editorials: editorialI[] = [];
-
+  public filterName:string = "";
   constructor(public editorialS:EditorialService){}
 
   ngOnInit(): void {

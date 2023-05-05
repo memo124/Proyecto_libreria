@@ -10,7 +10,7 @@
           data-bs-target="#modalEditorial">Add</button>
         </div>
         <div class="col-4">
-          <input type="text" class="form-control" placeholder="Search for name">
+          <input type="text" class="form-control" placeholder="Search for name" [(ngModel)]="filterName">
         </div>
       </div>
     </div>
@@ -31,10 +31,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let editorial of editorials">
+            <tr *ngFor="let editorial of editorials | editorial:filterName">
               <td>{{editorial.idEditorial}}</td>
               <td>{{editorial.nameEditorial}}</td>
-              <td>{{editorial.dateAdd}}</td>
+              <td>{{editorial.dateAdd | date:'dd-MM-yyyy'}}</td>
               <td>{{editorial.statusEditorial}}</td>
               <td><a class="btn btn-warning"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
             </tr>

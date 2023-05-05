@@ -10,7 +10,7 @@
           data-bs-target="#modalGenre">Add</button>
         </div>
         <div class="col-4">
-          <input type="text" class="form-control" placeholder="Search for name">
+          <input type="text" class="form-control" placeholder="Search for name" [(ngModel)]="filterName">
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let genre of genres">
+            <tr *ngFor="let genre of  genres | genre:filterName">
               <td>{{genre.idGenre}}</td>
               <td>{{genre.nameGenre}}</td>
               <td>{{genre.statusGenre}}</td>

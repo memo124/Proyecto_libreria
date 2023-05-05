@@ -11,7 +11,7 @@ import { EmployeeService } from 'src/app/services/employee/employee.service';
 export class EmployeeComponent implements OnInit {
 
   public employees: employeeI[] = [];
-
+  public filterName: string = "";
   constructor(public employeeS:EmployeeService,public helper:classHelper){}
 
   ngOnInit(): void {

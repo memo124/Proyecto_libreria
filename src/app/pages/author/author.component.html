@@ -11,7 +11,7 @@
           data-bs-target="#modalAuthor">Add</button>
         </div>
         <div class="col-4">
-          <input type="text" class="form-control" placeholder="Search for name">
+          <input type="text" class="form-control" placeholder="Search for name" [(ngModel)]="filterName">
         </div>
       </div>
     </div>
@@ -33,11 +33,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let author of authors; let i">
+            <tr *ngFor="let author of authors | author:filterName">
               <td>{{author.idAuthor}}</td>
               <td>{{author.nameAuhtor}}</td>
               <td>{{author.countryBirth}}</td>
-              <td>{{author.dateBorn}}</td>
+              <td>{{author.dateBorn | date:'dd-MM-yyyy'}}</td>
               <td>{{author.statusAuthor}}</td>
               <td><a class="btn btn-warning"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
             </tr>
