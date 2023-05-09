@@ -25,7 +25,7 @@
     "ngx-bootstrap-icons": "^1.9.2",
     "ngx-pagination": "^6.0.3",
     "rxjs": "~7.5.0",
-    "sweetalert2": "^11.7.3",
+    "sweetalert2": "^11.4.8",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },

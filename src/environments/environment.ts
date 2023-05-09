@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  uri:'https://libraryapi-main.onrender.com/'
+  uri:'https://libraryapimain.onrender.com/'
 };
 
 /*

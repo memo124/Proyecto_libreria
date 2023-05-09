@@ -67,41 +67,43 @@
         <h5 class="mb-0 text-info">Author data</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <form [formGroup]="formAuthor" (ngSubmit)="sendForm(formAuthor.value)">
       <div class="modal-body">
-        <div class="row">
-          <div class="col">
-            <label for="nameAuthor" class="form-label">Name:</label>
-            <input type="Text" class="form-control" id="nameAuthor">
+          <div class="row">
+            <div class="col">
+              <label for="nameAuthor" class="form-label">Name:</label>
+              <input type="Text" class="form-control" id="nameAuthor" formControlName="nameAuthor">
+            </div>
+            <div class="col">
+              <label for="dateAuthor" class="form-label">Date born:</label>
+              <input type="date" class="form-control" id="dateAuthor" formControlName="dateBorn">
+            </div>
           </div>
-          <div class="col">
-            <label for="dateAuthor" class="form-label">Date born:</label>
-            <input type="date" class="form-control" id="dateAuthor">
+          <div class="row">
+            <div class="col">
+              <label for="coutry" class="form-label">Country:</label>
+              <input type="Text" class="form-control" id="coutry" formControlName="countryBirth">
+            </div>
+            <div class="col">
+              <label for="statusAuthor" class="form-label"
+                  >Status:</label
+                >
+              <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  formControlName="statusAuthor"
+                >
+                  <option value="false" >Inactive</option>
+                  <option value="true" >Active</option>
+                </select>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <label for="coutry" class="form-label">Country:</label>
-            <input type="Text" class="form-control" id="coutry">
-          </div>
-          <div class="col">
-            <label for="statusAuthor" class="form-label"
-                >Status:</label
-              >
-            <select
-                class="form-select"
-                aria-label="Default select example"
-                formControlName="statusAuthor"
-              >
-                <option value="0" >Inactive</option>
-                <option value="1" >Active</option>
-              </select>
-          </div>
-        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
