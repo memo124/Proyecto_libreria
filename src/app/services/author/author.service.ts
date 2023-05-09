@@ -23,6 +23,11 @@ export class AuthorService {
     return this.http.get<authorI[]>(direction, this.httpOptions);
   }
 
+  getAuthorById(idAuthor:number):Observable<authorI>{
+    let direction = `${environment.uri}Author/`+idAuthor;
+    return this.http.get<authorI>(direction, this.httpOptions);
+  }
+
   postAuthor(form:object):Observable<responseI>{
     let direction = `${environment.uri}Author`;
     return this.http.post<responseI>(direction, form,this.httpOptions)

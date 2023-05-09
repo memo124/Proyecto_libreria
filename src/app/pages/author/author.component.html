@@ -39,7 +39,7 @@
               <td>{{author.countryBirth}}</td>
               <td>{{author.dateBorn | date:'dd-MM-yyyy'}}</td>
               <td>{{author.statusAuthor}}</td>
-              <td><a class="btn btn-warning"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
+              <td><a class="btn btn-warning" (click)="geAuthorById(author.idAuthor)"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
             </tr>
           </tbody>
         </table>
