@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, throwError  } from 'rxjs';
+import { Observable, catchError, map, retry, throwError  } from 'rxjs';
 import { authorI } from 'src/app/interfaces/author.interface';
 import { responseI } from 'src/app/interfaces/response.interface';
 import { environment } from 'src/environments/environment';
@@ -15,13 +15,15 @@ export class AuthorService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkphdmllciBKYXJhbWlsbG8iLCJjYXJuZXQiOiJKSjAxMDk3MiIsImV4cCI6MTY4Mzc2Njg4NH0.aZZl3kAKAcgV5plPeT02wBlPcA-SEHGX7Ie_VXS3WqE'
+      // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkphdmllciBKYXJhbWlsbG8iLCJjYXJuZXQiOiJKSjAxMDk3MiIsImV4cCI6MTY4Mzc4MjM1MH0.OAw7mxDp26wMVv3-F0ePZWAVZlYnT0ki16C8vBh0ZXw'
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
     }),
   };
 
   getAuthor():Observable<authorI[]>{
     let direction = `${environment.uri}Author`;
     return this.http.get<authorI[]>(direction, this.httpOptions).pipe(
+        retry(3),
         map(resp=>resp)
     );
   }
@@ -29,6 +31,7 @@ export class AuthorService {
   getAuthorById(idAuthor:number):Observable<authorI[]>{
     let direction = `${environment.uri}Author/`+idAuthor;
     return this.http.get<authorI[]>(direction, this.httpOptions).pipe(
+      retry(3),
       map(resp=>resp)
     );
   }

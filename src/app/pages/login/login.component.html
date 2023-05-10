@@ -10,8 +10,8 @@
 
     <!-- Login Form -->
     <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
-      <input type="text" id="login" class="fadeIn second"  placeholder="usuario" formControlName="usuario">
-      <input type="password" id="password" class="fadeIn third"  placeholder="password" formControlName="password">
+      <input type="text" id="login" class="fadeIn second"  placeholder="userName" formControlName="userName">
+      <input type="text" id="password" class="fadeIn third"  placeholder="carnet" formControlName="carnet">
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
 
