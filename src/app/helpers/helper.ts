@@ -10,7 +10,7 @@ export class classHelper {
     constructor(private router: Router) { }
 
     public viewStatus(status:boolean): string{
-      return (status === true) ? 'Active' : 'Inactive';
+      return (status == true) ? 'Active' : 'Inactive';
     }
 
     public messageAlert(titleM:string,messageM:string,iconM:any,buttonM:string):void{
@@ -20,5 +20,9 @@ export class classHelper {
         icon: iconM,
         confirmButtonText: buttonM
       })
+    }
+
+    public isAuthenticated():boolean{
+        return localStorage.getItem("token") != '';
     }
 }
