@@ -41,3 +41,6 @@ This package is use to design the different views of the project.
 
 `npm i ngx-bootstrap-icons --save`
 This package is used to add icons to the project.
+
+`npm install sweetalert2`
+This package is used to view messages

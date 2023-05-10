@@ -35,11 +35,12 @@
           <tbody>
             <tr *ngFor="let author of authors | author:filterName">
               <td>{{author.idAuthor}}</td>
-              <td>{{author.nameAuhtor}}</td>
+              <td>{{author.nameAuthor}}</td>
               <td>{{author.countryBirth}}</td>
               <td>{{author.dateBorn | date:'dd-MM-yyyy'}}</td>
-              <td>{{author.statusAuthor}}</td>
-              <td><a class="btn btn-warning"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
+              <td>{{viewStatus(author.statusAuthor)}}</td>
+              <td><a class="btn btn-warning" (click)="geAuthorById(author.idAuthor)" data-bs-toggle="modal"
+                data-bs-target="#modalAuthor"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
             </tr>
           </tbody>
         </table>
@@ -67,41 +68,44 @@
         <h5 class="mb-0 text-info">Author data</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <form [formGroup]="formAuthor" (ngSubmit)="sendForm(formAuthor.value)">
       <div class="modal-body">
-        <div class="row">
-          <div class="col">
-            <label for="nameAuthor" class="form-label">Name:</label>
-            <input type="Text" class="form-control" id="nameAuthor">
+        <input type="hidden" formControlName="idAuthor">
+          <div class="row">
+            <div class="col">
+              <label for="nameAuthor" class="form-label">Name:</label>
+              <input type="Text" class="form-control" id="nameAuthor" formControlName="nameAuthor">
+            </div>
+            <div class="col">
+              <label for="dateAuthor" class="form-label">Date born:</label>
+              <input type="date" class="form-control" id="dateAuthor" formControlName="dateBorn">
+            </div>
           </div>
-          <div class="col">
-            <label for="dateAuthor" class="form-label">Date born:</label>
-            <input type="date" class="form-control" id="dateAuthor">
+          <div class="row">
+            <div class="col">
+              <label for="coutry" class="form-label">Country:</label>
+              <input type="Text" class="form-control" id="coutry" formControlName="countryBirth">
+            </div>
+            <div class="col">
+              <label for="statusAuthor" class="form-label"
+                  >Status:</label
+                >
+              <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  formControlName="statusAuthor"
+                >
+                  <option value="0" >Inactive</option>
+                  <option value="1" >Active</option>
+                </select>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <label for="coutry" class="form-label">Country:</label>
-            <input type="Text" class="form-control" id="coutry">
-          </div>
-          <div class="col">
-            <label for="statusAuthor" class="form-label"
-                >Status:</label
-              >
-            <select
-                class="form-select"
-                aria-label="Default select example"
-                formControlName="statusAuthor"
-              >
-                <option value="0" >Inactive</option>
-                <option value="1" >Active</option>
-              </select>
-          </div>
-        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
