@@ -35,11 +35,12 @@
           <tbody>
             <tr *ngFor="let author of authors | author:filterName">
               <td>{{author.idAuthor}}</td>
-              <td>{{author.nameAuhtor}}</td>
+              <td>{{author.nameAuthor}}</td>
               <td>{{author.countryBirth}}</td>
               <td>{{author.dateBorn | date:'dd-MM-yyyy'}}</td>
-              <td>{{author.statusAuthor}}</td>
-              <td><a class="btn btn-warning" (click)="geAuthorById(author.idAuthor)"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
+              <td>{{viewStatus(author.statusAuthor)}}</td>
+              <td><a class="btn btn-warning" (click)="geAuthorById(author.idAuthor)" data-bs-toggle="modal"
+                data-bs-target="#modalAuthor"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
             </tr>
           </tbody>
         </table>
@@ -69,6 +70,7 @@
       </div>
       <form [formGroup]="formAuthor" (ngSubmit)="sendForm(formAuthor.value)">
       <div class="modal-body">
+        <input type="hidden" formControlName="idAuthor">
           <div class="row">
             <div class="col">
               <label for="nameAuthor" class="form-label">Name:</label>
@@ -93,8 +95,8 @@
                   aria-label="Default select example"
                   formControlName="statusAuthor"
                 >
-                  <option value="false" >Inactive</option>
-                  <option value="true" >Active</option>
+                  <option value="0" >Inactive</option>
+                  <option value="1" >Active</option>
                 </select>
             </div>
           </div>

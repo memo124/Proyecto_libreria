@@ -15,9 +15,10 @@ export class AuthorComponent implements OnInit {
   public dataAuthor: authorI ;
   public filterName: string = "";
   public formAuthor: FormGroup;
+
   constructor(private authorS:AuthorService,private helper:classHelper){
     this.formAuthor = new FormGroup({
-      idAuthor : new FormControl('1',Validators.required),
+      idAuthor : new FormControl('',Validators.required),
       nameAuthor: new FormControl(),
       countryBirth: new FormControl(),
       dateBorn: new FormControl(),
@@ -32,20 +33,30 @@ export class AuthorComponent implements OnInit {
   }
 
   sendForm(form:object) {
-    this.authorS.postAuthor(form).subscribe(author =>{
-      this.helper.messageAlert('Successfully',author.response,'success','Accepted');
-    });
+    if(this.formAuthor.value.idAuthor){
+      this.authorS.putAuthor(form,this.formAuthor.value.idAuthor).subscribe(author => {
+        this.helper.messageAlert('Successfully',author.response,'success','Accepted');
+      });
+    } else {
+      this.authorS.postAuthor(form).subscribe(author =>{
+        this.helper.messageAlert('Successfully',author.response,'success','Accepted');
+      });
+    }
+  }
+
+  viewStatus(status:boolean){
+    return this.helper.viewStatus(status);
   }
 
   geAuthorById(idAuthor: number){
     this.authorS.getAuthorById(idAuthor).subscribe(data=>{
-      this.dataAuthor = data;
+      this.dataAuthor = data[0];
       this.formAuthor.setValue({
-        'idAuthor':this.dataAuthor.idAuthor.toString,
-        'nameAuthor':this.dataAuthor.nameAuhtor,
+        'idAuthor':this.dataAuthor.idAuthor,
+        'nameAuthor':this.dataAuthor.nameAuthor,
         'countryBirth':this.dataAuthor.countryBirth,
         'dateBorn': this.dataAuthor.dateBorn,
-        'statusAuthor':this.dataAuthor.statusAuthor
+        'statusAuthor': this.dataAuthor.statusAuthor
       });
     })
   }
