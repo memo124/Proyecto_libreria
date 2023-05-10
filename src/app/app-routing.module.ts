@@ -18,18 +18,19 @@ import { EmployeePipe } from './pipes/employee/employee.pipe';
 import { RackPipe } from './pipes/rack/rack.pipe';
 import { ReservePipe } from './pipes/reserve/reserve.pipe';
 import { UserPipe } from './pipes/user/user.pipe';
+import { LoginGuard } from './pages/login/login.guard';
 
 const routes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
-  {path:'login',component: LoginComponent},
-  {path:'book',component: BooksComponent},
-  {path:'editorial',component: EditorialComponent},
-  {path:'employee',component:EmployeeComponent},
-  {path:'genre',component:GenreComponent},
-  {path:'rack',component:RackComponent},
-  {path:'reserve',component:ReserveComponent},
-  {path:'user',component:UserComponent},
-  {path:'author',component:AuthorComponent}
+  {path:'login',component: LoginComponent, canActivate:[LoginGuard]},
+  {path:'book',component: BooksComponent,canActivate:[LoginGuard]},
+  {path:'editorial',component: EditorialComponent,canActivate:[LoginGuard]},
+  {path:'employee',component:EmployeeComponent,canActivate:[LoginGuard]},
+  {path:'genre',component:GenreComponent,canActivate:[LoginGuard]},
+  {path:'rack',component:RackComponent,canActivate:[LoginGuard]},
+  {path:'reserve',component:ReserveComponent,canActivate:[LoginGuard]},
+  {path:'user',component:UserComponent,canActivate:[LoginGuard]},
+  {path:'author',component:AuthorComponent,canActivate:[LoginGuard]}
 ];
 
 @NgModule({
