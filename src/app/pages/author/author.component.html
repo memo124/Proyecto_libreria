@@ -21,7 +21,7 @@
   <div class="row align-items-center">
     <div class="card radius-10">
       <div class="card-body">
-        <table class="table table-striped">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -41,8 +41,8 @@
               <td>{{viewStatus(author.statusAuthor)}}</td>
               <td>
                 <a class="btn btn-warning" (click)="geAuthorById(author.idAuthor)" data-bs-toggle="modal" data-bs-target="#modalAuthor"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a>
-                <a class="btn btn-warning" (click)="geAuthorById(author.idAuthor)" data-bs-toggle="modal" data-bs-target="#modalAuthor"><i-bs name="eye-slash-fill"  width="15px"  height="15px"></i-bs></a>
-                <a class="btn btn-warning" (click)="geAuthorById(author.idAuthor)" data-bs-toggle="modal" data-bs-target="#modalAuthor"><i-bs name="eye-fill"  width="15px"  height="15px"></i-bs></a>
+                <a class="btn btn-warning"  (click)="inactivateAuthor(author.idAuthor)" *ngIf="author.statusAuthor == true"><i-bs name="eye-slash-fill"  width="15px"  height="15px"></i-bs></a>
+                <a class="btn btn-warning" (click)="activateAuthor(author.idAuthor)" *ngIf="author.statusAuthor == false"><i-bs name="eye-fill"  width="15px"  height="15px"></i-bs></a>
               </td>
             </tr>
           </tbody>
