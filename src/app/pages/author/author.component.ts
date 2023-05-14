@@ -18,8 +18,8 @@ export class AuthorComponent implements OnInit {
 
   constructor(private authorS:AuthorService,private helper:classHelper){
     this.formAuthor = new FormGroup({
-      idAuthor : new FormControl('',Validators.required),
-      nameAuthor: new FormControl(),
+      idAuthor : new FormControl(''),
+      nameAuthor: new FormControl('',[Validators.pattern(this.helper.validateSting())]),
       countryBirth: new FormControl(),
       dateBorn: new FormControl(),
       statusAuthor: new FormControl()

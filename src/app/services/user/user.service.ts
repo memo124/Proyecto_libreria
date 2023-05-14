@@ -13,12 +13,18 @@ export class UserService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+localStorage.getItem('token')
     }),
   };
 
   getUsers(): Observable<userI[]>{
     let directions = `${environment.uri}User`;
+    return this.http.get<userI[]>(directions,this.httpOptions);
+  }
+
+  getUserById(idUser:number): Observable<userI[]>{
+    let directions = `${environment.uri}User/`+idUser;
     return this.http.get<userI[]>(directions,this.httpOptions);
   }
 }
