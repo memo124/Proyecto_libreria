@@ -1,8 +1,26 @@
 <app-header></app-header>
 
+<br>
+<div class="container">
+  <div class="row" >
+    <div class="card radius-10" style="padding: 5px;">
+      <div class="row">
+        <div class="col-4">
+          <button class="btn btn-primary" data-bs-toggle="modal"
+          data-bs-target="#modalBook" (click)="getCombox()">Add</button>
+        </div>
+        <div class="col-4">
+          <input type="text" class="form-control" placeholder="Search for name" [(ngModel)]="filterName">
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+
 <!-- <div class="row"> -->
   <div class="container">
-    <div class="row" *ngFor="let book of books | paginate : { itemsPerPage: 5, currentPage: p };">
+    <div class="row" *ngFor="let book of books | paginate : { itemsPerPage: 4, currentPage: p };">
       <div class="card description" >
         <div class="row">
           <div class="col-4">Title:{{book.bookName}}</div>
@@ -18,7 +36,7 @@
           <div class="col-2"><img src="assets/img/descarga.png" alt="" class="img-thumbnail imagen"></div>
           <div class="col-2">
             <button class="btn btn-outline-success"  data-bs-toggle="modal"
-            data-bs-target="#modalBook">Edit</button>
+            data-bs-target="#modalBook" (click)="getCombox()">Edit</button>
             &nbsp;
             <button class="btn btn-outline-success" data-bs-toggle="modal"
             data-bs-target="#modalReserve">Reserve</button>
@@ -67,19 +85,51 @@
           <div class="row">
             <div class="col">
               <label for="nameTitle" class="form-label">Title:</label>
-              <input type="Text" class="form-control" id="nameTitle">
+              <input type="Text" class="form-control" id="nameTitle" formControlName="nameTi">
             </div>
+          </div>
+          <div class="row">
             <div class="col">
               <label for="dateAuthor" class="form-label">Author:</label>
-              <input type="date" class="form-control" id="dateAuthor">
+              <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  formControlName="statusAuthor"
+                >
+                  <option value="{{author.idAuthor}}" *ngFor="let author of authors">{{author.nameAuthor}}</option>
+                </select>
             </div>
             <div class="col">
-              <label for="nameTitle" class="form-label">Genre:</label>
-              <input type="Text" class="form-control" id="nameTitle">
+              <label for="idGenre" class="form-label">Genre:</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  formControlName="idGenre"
+                >
+                  <option value="{{genre.idGenre}}" *ngFor="let genre of genres">{{genre.nameGenre}}</option>
+                </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="idEditorial" class="form-label">Editorial:</label>
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                formControlName="idEditorial"
+              >
+                <option value="{{editorial.idEditorial}}" *ngFor="let editorial of editorials">{{editorial.nameEditorial}}</option>
+              </select>
             </div>
             <div class="col">
-              <label for="dateAuthor" class="form-label">Editorial:</label>
-              <input type="date" class="form-control" id="dateAuthor">
+              <label for="idRack" class="form-label">Rack:</label>
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                formControlName="idRack"
+              >
+                <option value="{{rack.idRack}}" *ngFor="let rack of racks">{{rack.nameRack}} - Count level: {{rack.levels}}</option>
+              </select>
             </div>
           </div>
           <div class="row">
@@ -88,10 +138,10 @@
               <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
         </div>
       </div>
     </div>

@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { authorI } from 'src/app/interfaces/author.interface';
 import { booksI } from 'src/app/interfaces/books.interface';
+import { editorialI } from 'src/app/interfaces/editorial.interface';
+import { genreI } from 'src/app/interfaces/genre.interface';
+import { rackI } from 'src/app/interfaces/rack.interface';
+import { AuthorService } from 'src/app/services/author/author.service';
 import { BooksService } from 'src/app/services/books/books.service';
+import { EditorialService } from 'src/app/services/editorial/editorial.service';
+import { GenreService } from 'src/app/services/genre/genre.service';
+import { RackService } from 'src/app/services/rack/rack.service';
 
 @Component({
   selector: 'app-books',
@@ -12,7 +20,13 @@ export class BooksComponent implements OnInit {
 
   public books: booksI[] = [];
   public p: number = 1;
-  constructor(private sanitizer: DomSanitizer, private bookS:BooksService) {
+  public filterName: string = "";
+  public authors: authorI[] = [];
+  public genres: genreI[] = [];
+  public editorials: editorialI[] = [];
+  public racks: rackI[] = [];
+
+  constructor(private rackS:RackService,private editorialS:EditorialService,private sanitizer: DomSanitizer, private bookS:BooksService,private authorS:AuthorService,private genreS:GenreService) {
 
   }
 
@@ -22,6 +36,23 @@ export class BooksComponent implements OnInit {
     })
   }
 
+  getCombox(){
+    this.authorS.getAuthor().subscribe(data=>{
+      this.authors = data;
+    });
+
+    this.genreS.getGenres().subscribe(data=>{
+      this.genres = data;
+    });
+
+    this.editorialS.getEditorial().subscribe(data=>{
+      this.editorials = data;
+    });
+
+    this.rackS.getRacks().subscribe(data=>{
+      this.racks = data;
+    });
+  }
 
   public previsualizacion?: string;
   public archivos: any = [];

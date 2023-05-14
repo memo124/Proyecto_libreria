@@ -27,6 +27,10 @@ export class AuthorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAlls();
+  }
+
+  getAlls(){
     this.authorS.getAuthor().subscribe(author =>{
       this.authors = author
     });
@@ -36,10 +40,12 @@ export class AuthorComponent implements OnInit {
     if(this.formAuthor.value.idAuthor){
       this.authorS.putAuthor(form,this.formAuthor.value.idAuthor).subscribe(author => {
         this.helper.messageAlert('Successfully',author.response,'success','Accepted');
+        this.getAlls();
       });
     } else {
       this.authorS.postAuthor(form).subscribe(author =>{
         this.helper.messageAlert('Successfully',author.response,'success','Accepted');
+        this.getAlls();
       });
     }
   }
@@ -59,5 +65,17 @@ export class AuthorComponent implements OnInit {
         'statusAuthor': this.dataAuthor.statusAuthor
       });
     })
+  }
+
+  inactivateAuthor(idAuthor: number) {
+    this.authorS.deleteAuthor(idAuthor).subscribe(()=>{
+      this.getAlls();
+    });
+  }
+
+  activateAuthor(idAuthor: number){
+    this.authorS.putAuthorActivate(idAuthor).subscribe(()=>{
+      this.getAlls();
+    });
   }
 }

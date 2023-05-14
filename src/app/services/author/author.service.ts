@@ -24,7 +24,10 @@ export class AuthorService {
     let direction = `${environment.uri}Author`;
     return this.http.get<authorI[]>(direction, this.httpOptions).pipe(
         retry(3),
-        map(resp=>resp)
+        map(resp=>resp),
+        catchError((error) => {
+          return throwError(() => error);
+        })
     );
   }
 
@@ -32,7 +35,10 @@ export class AuthorService {
     let direction = `${environment.uri}Author/`+idAuthor;
     return this.http.get<authorI[]>(direction, this.httpOptions).pipe(
       retry(3),
-      map(resp=>resp)
+      map(resp=>resp),
+       catchError((error) => {
+        return throwError(() => error);
+      })
     );
   }
 

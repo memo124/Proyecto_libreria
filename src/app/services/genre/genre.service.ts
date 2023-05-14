@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { genreI } from 'src/app/interfaces/genre.interface';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +13,14 @@ export class GenreService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      // 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkphdmllciBKYXJhbWlsbG8iLCJjYXJuZXQiOiJKSjAxMDk3MiIsImV4cCI6MTY4Mzc4MjM1MH0.OAw7mxDp26wMVv3-F0ePZWAVZlYnT0ki16C8vBh0ZXw'
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
     }),
   };
 
   getGenres(): Observable<genreI[]>{
-    let directions = `${environment.uri}Genre`;
+    let directions = `${environment.uri}Genre?page=1&limit=100&actives=true`;
     console.log(directions);
     return this.http.get<genreI[]>(directions,this.httpOptions);
   }
