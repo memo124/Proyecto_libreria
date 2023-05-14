@@ -29,4 +29,26 @@ export class classHelper {
     public validateSting(): string{
       return '/[a-z]/';
     }
+
+    public onlyString():string{
+      return '/[a-zA-Z ]*/'
+    }
+
+    public onlyEmail():string{
+      return '/^\S+@\S+\.\S+$/'
+    }
+
+    public onlyNumber():string{
+      return '/[0-9]*$/'
+    }
+
+    public onlyTextNumberr():string{
+      return '^[a-zA-Z0-9_.-]*$'
+    }
+
+    public onlyTextMinus():string{
+      return '^\-?\d*\.?\d*$'
+    }
+
+
 }
