@@ -25,4 +25,8 @@ export class classHelper {
     public isAuthenticated():boolean{
         return localStorage.getItem("token") != '';
     }
+
+    public validateSting(): string{
+      return '/[a-z]/';
+    }
 }

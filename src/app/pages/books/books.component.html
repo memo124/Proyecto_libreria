@@ -36,10 +36,10 @@
           <div class="col-2"><img src="assets/img/descarga.png" alt="" class="img-thumbnail imagen"></div>
           <div class="col-2">
             <button class="btn btn-outline-success"  data-bs-toggle="modal"
-            data-bs-target="#modalBook" (click)="getCombox()">Edit</button>
+            data-bs-target="#modalBook" (click)="getDataBook(book.idBook)">Edit</button>
             &nbsp;
             <button class="btn btn-outline-success" data-bs-toggle="modal"
-            data-bs-target="#modalReserve">Reserve</button>
+            data-bs-target="#modalReserve" (click)="getDataBookReservate(book.idBook)">Reserve</button>
           </div>
         </div>
       </div>
@@ -72,77 +72,94 @@
           <h5 class="mb-0 text-info">Books data</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col align-items-center">
-              <div *ngIf="previsualizacion" style="display: flex; justify-content: center;">
-                <img [src]="previsualizacion" src="{{img}}" alt="Admin" class="p-1 bg-success" width="250" height="250" id="inputGroupFileAddon04" >
+        <form [formGroup]="formBook" (ngSubmit)="sendForm(formBook.value)">
+          <div class="modal-body">
+            <input type="hidden" formControlName="idBook">
+            <div class="row">
+              <div class="col align-items-center">
+                <div *ngIf="previsualizacion" style="display: flex; justify-content: center;">
+                  <img [src]="previsualizacion" src="{{img}}" alt="Admin" class="p-1 bg-success" width="250" height="250" id="inputGroupFileAddon04" >
+                </div>
+                <br>
+                <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" (change)="capturarFile($event)" formControlName="txtimg">
               </div>
-              <br>
-              <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" (change)="capturarFile($event)" formControlName="txtimg">
             </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <label for="nameTitle" class="form-label">Title:</label>
-              <input type="Text" class="form-control" id="nameTitle" formControlName="nameTi">
+            <div class="row">
+              <div class="col">
+                <label for="bookName" class="form-label">Title:</label>
+                <input type="Text" class="form-control" id="bookName" formControlName="bookName">
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <label for="dateAuthor" class="form-label">Author:</label>
-              <select
-                  class="form-select"
-                  aria-label="Default select example"
-                  formControlName="statusAuthor"
-                >
-                  <option value="{{author.idAuthor}}" *ngFor="let author of authors">{{author.nameAuthor}}</option>
-                </select>
+            <div class="row">
+              <div class="col">
+                <label for="idAuthor" class="form-label">Author:</label>
+                <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    formControlName="idAuthor"
+                  >
+                    <option value="{{author.idAuthor}}" *ngFor="let author of authors">{{author.nameAuthor}}</option>
+                  </select>
+              </div>
+              <div class="col">
+                <label for="idGenre" class="form-label">Genre:</label>
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    formControlName="idGenre"
+                  >
+                    <option value="{{genre.idGenre}}" *ngFor="let genre of genres">{{genre.nameGenre}}</option>
+                  </select>
+              </div>
             </div>
-            <div class="col">
-              <label for="idGenre" class="form-label">Genre:</label>
+            <div class="row">
+              <div class="col">
+                <label for="idEditorial" class="form-label">Editorial:</label>
                 <select
                   class="form-select"
                   aria-label="Default select example"
-                  formControlName="idGenre"
+                  formControlName="idEditorial"
                 >
-                  <option value="{{genre.idGenre}}" *ngFor="let genre of genres">{{genre.nameGenre}}</option>
+                  <option value="{{editorial.idEditorial}}" *ngFor="let editorial of editorials">{{editorial.nameEditorial}}</option>
                 </select>
+              </div>
+              <div class="col">
+                <label for="idRack" class="form-label">Rack:</label>
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  formControlName="idRack"
+                >
+                  <option value="{{rack.idRack}}" *ngFor="let rack of racks">{{rack.nameRack}} - Count level: {{rack.levels}}</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <label for="idEditorial" class="form-label">Editorial:</label>
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                formControlName="idEditorial"
-              >
-                <option value="{{editorial.idEditorial}}" *ngFor="let editorial of editorials">{{editorial.nameEditorial}}</option>
-              </select>
+            <div class="row">
+              <div class="col">
+                <label for="quantityStock" class="form-label">Quantity:</label>
+                <input type="text" class="form-control" name="quantityStock" id="quantityStock" formControlName="quantityStock">
+              </div>
+              <div class="col">
+                <label for="totalPague" class="form-label">Pagues:</label>
+                <input type="number" class="form-control" name="totalPague" id="totalPague" formControlName="totalPague">
+              </div>
+              <div class="col">
+                <label for="publicationDate" class="form-label">Publication date:</label>
+                <input type="date" class="form-control" name="publicationDate" id="publicationDate" formControlName="publicationDate">
+              </div>
             </div>
-            <div class="col">
-              <label for="idRack" class="form-label">Rack:</label>
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                formControlName="idRack"
-              >
-                <option value="{{rack.idRack}}" *ngFor="let rack of racks">{{rack.nameRack}} - Count level: {{rack.levels}}</option>
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <label for="floatingTextarea2">Description:</label>
-              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-            </div>
+            <!-- <div class="row">
+              <div class="col">
+                <label for="floatingTextarea2">Description:</label>
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+              </div>
+            </div> -->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -168,21 +185,17 @@ aria-hidden="true"
       </div>
       <div class="modal-body">
         <div class="row" style="padding: 15px;">
-          <div class="card">
+          <div class="card" *ngFor="let book of dataBookReserve">
             <div class="row">
-              <div class="col-4">Title:</div>
-              <div class="col-4">Genre:</div>
+              <div class="col-4">Title:{{book.bookName}}</div>
+              <div class="col-4">Genre:{{book.Genre.nameGenre}}</div>
             </div>
             <div class="row">
-              <div class="col-4">Author:</div>
-              <div class="col-4">Editorial:</div>
+              <div class="col-4">Author:{{book.Author.nameAuthor}}</div>
+              <div class="col-4">Editorial:{{book.Editorial.nameEditorial}}</div>
             </div>
             <div class="row">
-              <div class="col-8">Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Molestiae magni
-                accusantium consequuntur optio dolore reprehenderit
-                quis iure a excepturi magnam perferendis mollitia facilis,
-                possimus autem voluptatum vero error! Eos, repudiandae?
+              <div class="col-8">{{book.bookCover}}
               </div>
               <div class="col-4"><img src="assets/img/descarga.png" alt="" class="img-thumbnail imagen"></div>
             </div>
@@ -190,22 +203,26 @@ aria-hidden="true"
         </div>
         <div class="row" style="padding: 15px;">
           <div class="card">
-            <div class="row">
+            <div class="row" style="padding-bottom: 15px;">
               <div class="col-4">
                 <label for="Carnet" class="form-label">Carnet:</label>
-                <input type="Text" class="form-control" id="Carnet">
+                <input type="Text" class="form-control" id="Carnet" (keyup.enter)="searchUser()" [(ngModel)]="carnet">
               </div>
             </div>
+           <div *ngFor="let user of userData">
             <div class="row" style="padding-bottom: 15px;">
-              <div class="col-4">Name:</div>
-              <div class="col-4">Email:</div>
-              <div class="col-4">Phone:</div>
+              <div class="col-4"><b>Name: </b>{{user.nameUser}}</div>
+              <div class="col-6"><b>Email: </b>{{user.emailUser}}</div>
+              <div class="col-2"><b>Phone:</b>{{user.phoneUser}}</div>
             </div>
             <div class="row" style="padding-bottom: 15px;">
-              <div class="col-4">Reservation date:</div>
-              <div class="col-4">Status:</div>
+              <div class="col-4">
+                <label for="reservationDate" class="form-label">Reservation date:</label>
+                <input type="text" class="form-control" id="reservationDate" name="reservationDate">
+              </div>
             </div>
           </div>
+           </div>
         </div>
       </div>
       <div class="modal-footer">
