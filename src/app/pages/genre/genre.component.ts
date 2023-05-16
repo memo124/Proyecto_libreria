@@ -14,6 +14,8 @@ export class GenreComponent implements OnInit {
   public genres: genreI[] = [];
   public filterName: string = "";
   public formGenre: FormGroup;
+  public dataGenre: genreI;
+
 
   constructor(public genreS:GenreService, private helper:classHelper){
     this.formGenre = new FormGroup({
@@ -31,9 +33,17 @@ export class GenreComponent implements OnInit {
     this.genreS.getGenres().subscribe(genres =>{
         this.genres = genres;
     });
-}
+  }
 
-
+  getDataGenres(idGenre: number):void {
+    this.genreS.getGenreById(idGenre).subscribe(genres =>{
+      let data = genres[0];
+      this.formGenre.setValue({
+        'nameGenre': data.nameGenre,
+        'statusGenre': data.statusGenre
+      });
+    });
+  }
   sendForm(form:object): void {
     this.genreS.postGenre(form).subscribe(genres =>{
       this.helper.messageAlert('Success',genres.response, 'success', 'Accepted');
@@ -46,5 +56,12 @@ export class GenreComponent implements OnInit {
         this.helper.messageAlert('Success',data.response,'success', 'Accepted');
         this.getAllGenres();
       });
+  }
+
+  activateGenre(idGenre:number): void {
+    this.genreS.putActivateGenre(idGenre).subscribe(data => {
+      this.helper.messageAlert('Success',data.response,'success', 'Accepted');
+      this.getAllGenres();
+    });
   }
 }
