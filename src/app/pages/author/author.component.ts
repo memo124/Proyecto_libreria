@@ -15,10 +15,10 @@ export class AuthorComponent implements OnInit {
   public dataAuthor: authorI ;
   public filterName: string = "";
   public formAuthor: FormGroup;
+  public idAuthor: number = 0;
 
   constructor(private authorS:AuthorService,private helper:classHelper){
     this.formAuthor = new FormGroup({
-      idAuthor : new FormControl(''),
       nameAuthor: new FormControl('',[Validators.pattern(this.helper.validateSting())]),
       countryBirth: new FormControl(),
       dateBorn: new FormControl(),
@@ -37,8 +37,8 @@ export class AuthorComponent implements OnInit {
   }
 
   sendForm(form:object) {
-    if(this.formAuthor.value.idAuthor){
-      this.authorS.putAuthor(form,this.formAuthor.value.idAuthor).subscribe(author => {
+    if(this.idAuthor != 0 ){
+      this.authorS.putAuthor(form,this.idAuthor).subscribe(author => {
         this.helper.messageAlert('Successfully',author.response,'success','Accepted');
         this.getAlls();
       });
@@ -57,8 +57,8 @@ export class AuthorComponent implements OnInit {
   geAuthorById(idAuthor: number){
     this.authorS.getAuthorById(idAuthor).subscribe(data=>{
       this.dataAuthor = data[0];
+      this.idAuthor = this.dataAuthor.idAuthor;
       this.formAuthor.setValue({
-        'idAuthor':this.dataAuthor.idAuthor,
         'nameAuthor':this.dataAuthor.nameAuthor,
         'countryBirth':this.dataAuthor.countryBirth,
         'dateBorn': this.dataAuthor.dateBorn,

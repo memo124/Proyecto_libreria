@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { classHelper } from 'src/app/helpers/helper';
 import { authorI } from 'src/app/interfaces/author.interface';
 import { booksI } from 'src/app/interfaces/books.interface';
 import { editorialI } from 'src/app/interfaces/editorial.interface';
@@ -34,13 +35,13 @@ export class BooksComponent implements OnInit {
   public carnet: number;
   public userData: userI[] = [];
   public previsualizacion?: string;
+  public idBook: number = 0;
   public archivos: any = [];
   public img: string = "";
   public base64:any;
 
-  constructor(private userS:UserService,private rackS:RackService,private editorialS:EditorialService,private sanitizer: DomSanitizer, private bookS:BooksService,private authorS:AuthorService,private genreS:GenreService) {
+  constructor(private userS:UserService,private helper:classHelper,private rackS:RackService,private editorialS:EditorialService,private sanitizer: DomSanitizer, private bookS:BooksService,private authorS:AuthorService,private genreS:GenreService) {
     this.formBook = new FormGroup({
-      idBook: new FormControl(),
       bookName: new FormControl(),
       publicationDate: new FormControl(),
       totalPague: new FormControl(),
@@ -53,9 +54,13 @@ export class BooksComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAllBooks();
+  }
+
+  getAllBooks(){
     this.bookS.getBooks().subscribe(data=>{
       this.books = data
-    })
+    });
   }
 
   getDataBookReservate(idBook:number){
@@ -83,9 +88,17 @@ export class BooksComponent implements OnInit {
   }
 
   sendForm(form:object){
-    this.bookS.postBook(form).subscribe(data=>{
-      console.log(data);
-    });
+    if (this.idBook != 0) {
+      this.bookS.putBook(this.idBook,form).subscribe(data=>{
+        this.helper.messageAlert('Successfully',data.response,'success','Accepted');
+        this.getAllBooks();
+      });
+    } else {
+      this.bookS.postBook(form).subscribe(data=>{
+        this.helper.messageAlert('Successfully',data.response,'success','Accepted');
+        this.getAllBooks();
+      });
+    }
   }
 
   searchUser(){
@@ -94,11 +107,25 @@ export class BooksComponent implements OnInit {
     });
   }
 
+  inactivateAuthor(idBook: number) {
+    this.bookS.deleteBook(idBook).subscribe(()=>{
+      this.getAllBooks();
+    });
+  }
+
+  activateAuthor(idBook: number){
+    this.bookS.putBookActivate(idBook).subscribe(()=>{
+      this.getAllBooks();
+    });
+  }
+
   getDataBook(idBook:number){
     this.bookS.getBookById(idBook).subscribe(data=>{
        this.dataBook = data[0];
+       this.getCombox();
+       console.log(this.dataBook.idBook);
+       this.idBook = this.dataBook.idBook;
        this.formBook.setValue({
-        'idBook': this.dataBook.idBook,
         'bookName': this.dataBook.bookName,
         'publicationDate': this.dataBook.publicationDate,
         'totalPague': this.dataBook.totalPague,

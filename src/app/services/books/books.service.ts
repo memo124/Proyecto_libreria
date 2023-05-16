@@ -21,7 +21,7 @@ export class BooksService {
   };
 
   getBooks(): Observable<booksI[]>{
-    let direction = `${environment.uri}Book`;
+    let direction = `${environment.uri}Book?page=1&limit=100&actives=false`;
     return this.http.get<booksI[]>(direction,this.httpOptions);
   }
 
@@ -31,6 +31,7 @@ export class BooksService {
   }
 
   putBook(idBook:number,form:object):Observable<responseI>{
+    console.log(idBook);
     let direction = `${environment.uri}Book/`+idBook;
     return this.http.put<responseI>(direction,form,this.httpOptions);
   }

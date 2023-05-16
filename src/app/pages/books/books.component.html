@@ -31,9 +31,13 @@
           <div class="col-4">Editorial:{{book.Editorial.nameEditorial}}</div>
         </div>
         <div class="row">
-          <div class="col-8">{{book.bookCover}}
+          <div class="col-6">{{book.bookCover}}
           </div>
           <div class="col-2"><img src="assets/img/descarga.png" alt="" class="img-thumbnail imagen"></div>
+          <div class="col-2">
+            <a class="btn btn-warning"  (click)="inactivateAuthor(book.idBook)" *ngIf="book.statusBook == true"><i-bs name="eye-slash-fill"  width="15px"  height="15px"></i-bs></a>
+            <a class="btn btn-warning" (click)="activateAuthor(book.idBook)" *ngIf="book.statusBook == false"><i-bs name="eye-fill"  width="15px"  height="15px"></i-bs></a>
+          </div>
           <div class="col-2">
             <button class="btn btn-outline-success"  data-bs-toggle="modal"
             data-bs-target="#modalBook" (click)="getDataBook(book.idBook)">Edit</button>
@@ -74,7 +78,6 @@
         </div>
         <form [formGroup]="formBook" (ngSubmit)="sendForm(formBook.value)">
           <div class="modal-body">
-            <input type="hidden" formControlName="idBook">
             <div class="row">
               <div class="col align-items-center">
                 <div *ngIf="previsualizacion" style="display: flex; justify-content: center;">

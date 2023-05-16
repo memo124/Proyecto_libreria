@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { genreI } from 'src/app/interfaces/genre.interface';
+import { responseI } from 'src/app/interfaces/response.interface';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -21,7 +22,11 @@ export class GenreService {
 
   getGenres(): Observable<genreI[]>{
     let directions = `${environment.uri}Genre?page=1&limit=100&actives=true`;
-    console.log(directions);
     return this.http.get<genreI[]>(directions,this.httpOptions);
+  }
+
+  postGenre(form:object):Observable<responseI>{
+    let directions = `${environment.uri}Genre`;
+    return this.http.post<responseI>(directions,form,this.httpOptions)
   }
 }

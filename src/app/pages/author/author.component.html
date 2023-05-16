@@ -41,7 +41,9 @@
               <td>{{viewStatus(author.statusAuthor)}}</td>
               <td>
                 <a class="btn btn-warning" (click)="geAuthorById(author.idAuthor)" data-bs-toggle="modal" data-bs-target="#modalAuthor"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a>
+                <!-- start Delete -->
                 <a class="btn btn-warning"  (click)="inactivateAuthor(author.idAuthor)" *ngIf="author.statusAuthor == true"><i-bs name="eye-slash-fill"  width="15px"  height="15px"></i-bs></a>
+                <!-- end Delete -->
                 <a class="btn btn-warning" (click)="activateAuthor(author.idAuthor)" *ngIf="author.statusAuthor == false"><i-bs name="eye-fill"  width="15px"  height="15px"></i-bs></a>
               </td>
             </tr>
