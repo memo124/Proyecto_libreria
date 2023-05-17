@@ -31,12 +31,19 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let editorial of editorials | editorial:filterName">
+            <tr *ngFor="let editorial of editorial | editorial:filterName">
               <td>{{editorial.idEditorial}}</td>
               <td>{{editorial.nameEditorial}}</td>
               <td>{{editorial.dateAdd | date:'dd-MM-yyyy'}}</td>
               <td>{{editorial.statusEditorial}}</td>
               <td><a class="btn btn-warning"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
+              <td>
+                <a class="btn btn-warning" (click)="getEditorialById(editorial.idEditorial)" data-bs-toggle="modal" data-bs-target="#modalEditorial"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a>
+                <!-- start Delete -->
+                <a class="btn btn-warning"  (click)="inactivateEditorial(editorial.idEditorial)" *ngIf="editorial.statusEditorial == true"><i-bs name="eye-slash-fill"  width="15px"  height="15px"></i-bs></a>
+                <!-- end Delete -->
+                <a class="btn btn-warning" (click)="activateEditorial(editorial.idEditorial)" *ngIf="editorial.statusEditorial == false"><i-bs name="eye-fill"  width="15px"  height="15px"></i-bs></a>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -65,44 +72,41 @@
         <h5 class="mb-0 text-info">Editorial data</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col">
-            <label for="nameAuthor" class="form-label">Name:</label>
-            <input type="Text" class="form-control" id="nameAuthor">
-          </div>
-          <div class="col">
-            <label for="dateAuthor" class="form-label">Date born:</label>
-            <input type="date" class="form-control" id="dateAuthor">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <label for="nameAuthor" class="form-label">Country:</label>
-            <input type="Text" class="form-control" id="nameAuthor">
-          </div>
-          <div class="col">
-            <label for="statusAuthor" class="form-label"
-                >Status:</label
-              >
-            <select
-                class="form-select"
-                aria-label="Default select example"
-                formControlName="statusAuthor"
-              >
-                <option value="0" >Inactive</option>
-                <option value="1" >Active</option>
-              </select>
+      <form [formGroup]="formEditorial" (ngSubmit)="sendForm(formEditorial.value)">
+        <div class="modal-body">
+          <input type="hidden" formControlName="idEditorial">
+          <div class="row">
+            <div class="col">
+              <label for="nameEditorial" class="form-label">Name:</label>
+              <input type="Text" class="form-control" id="nameEditorial" formControlName="nameEditorial">
+            </div>
+            <div class="col">
+              <label for="dateAdd " class="form-label">date Add:</label>
+              <input type="Text" class="form-control" id="dateAdd" formControlName="dateAdd">
+            </div>
+            <div class="col">
+                  <label for="statusEditorial" class="form-label"
+                  >Status:
+                  </label
+                >
+              <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  formControlName="statusEditorial"
+                >
+                  <option value="0" >Inactive</option>
+                  <option value="1" >Active</option>
+                </select>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+        </form>
       </div>
     </div>
   </div>
-</div>
+  <app-footer></app-footer>
 
-
-<app-footer></app-footer>
