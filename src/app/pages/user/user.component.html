@@ -32,14 +32,20 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let user of users | user:filterName">
+            <tr *ngFor="let user of user | user:filterName">
               <td>{{user.idUser}}</td>
               <td>{{user.nameUser}}</td>
               <td>{{user.carnetUser}}</td>
               <td>{{user.emailUser}}</td>
               <td>{{user.phoneUser}}</td>
-              <td>{{user.statusUser}}</td>
-              <td><a class="btn btn-warning"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
+              <td>{{viewStatus(user.statusUser)}}</td>
+              <td>
+                <a class="btn btn-warning" (click)="getUsersById(user.idUser)" data-bs-toggle="modal" data-bs-target="#modalUser"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a>
+                <!-- start Delete -->
+                <a class="btn btn-warning"  (click)="inactivateUser(user.idUser)" *ngIf="user.statusUser == true"><i-bs name="eye-slash-fill"  width="15px"  height="15px"></i-bs></a>
+                <!-- end Delete -->
+                <a class="btn btn-warning" (click)="activateUser(user.idUser)" *ngIf="user.statusUser == false"><i-bs name="eye-fill"  width="15px"  height="15px"></i-bs></a>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -68,49 +74,49 @@
         <h5 class="mb-0 text-info">User data</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-3">
-            <label for="Carnet" class="form-label">Carnet:</label>
-            <input type="Text" class="form-control" id="Carnet">
-          </div>
-          <div class="col">
-            <label for="" class="form-label">Name:</label>
-            <input type="Text" class="form-control" id="Name">
+      <form [formGroup]="formUser" (ngSubmit)="sendForm(formUser.value)">
+        <div class="modal-body">
+          <input type="hidden" formControlName="idUser">
+          <div class="row">
+            <div class="col">
+              <label for="nameUser" class="form-label">Name:</label>
+              <input type="Text" class="form-control" id="nameUser" formControlName="nameUser">
+            </div>
+            <div class="col">
+              <label for="carnetUser" class="form-label">Carnet:</label>
+              <input type="Text" class="form-control" id="carnetUser" formControlName="carnetUser">
+            </div>
+            <div class="col">
+              <label for="emailUser" class="form-label">Email:</label>
+              <input type="Text" class="form-control" id="emailUser" formControlName="emailUser">
+            </div>
+            <div class="col">
+              <label for="phoneUser" class="form-label">Phone:</label>
+              <input type="Text" class="form-control" id="phoneUser" formControlName="phoneUser">
+            </div>
+            <div class="col">
+                  <label for="statusUser" class="form-label"
+                  >Status:
+                  </label
+                >
+              <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  formControlName="statusUser"
+                >
+                  <option value="0" >Inactive</option>
+                  <option value="1" >Active</option>
+                </select>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
-            <label for="Email" class="form-label">Email:</label>
-            <input type="Text" class="form-control" id="Email">
-          </div>
-          <div class="col">
-            <label for="Number" class="form-label">Phone:</label>
-            <input type="Text" class="form-control" id="Number">
-          </div>
-          <div class="col">
-            <label for="statusAuthor" class="form-label"
-                >Status:</label
-              >
-            <select
-                class="form-select"
-                aria-label="Default select example"
-                formControlName="statusAuthor"
-              >
-                <option value="0" >Inactive</option>
-                <option value="1" >Active</option>
-              </select>
-          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        </form>
       </div>
     </div>
   </div>
-</div>
 
-
-
-<app-footer></app-footer>
+  <app-footer></app-footer>
