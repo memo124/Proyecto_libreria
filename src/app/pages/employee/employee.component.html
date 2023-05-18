@@ -27,16 +27,22 @@
               <th scope="col">Name</th>
               <th scope="col">carnet</th>
               <th scope="col">Status</th>
-              <th scope="col">Action</th>
+              <th scope="col" class="align-items-center" >Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let employee of employees | employee:filterName">
+            <tr *ngFor="let employee of employee | employee:filterName">
               <td>{{employee.idEmployee}}</td>
               <td>{{employee.nameEmployee}}</td>
               <td>{{employee.employeeNumber}}</td>
               <td>{{viewStatus(employee.statusEmployee)}}</td>
-              <td><a class="btn btn-warning"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
+              <td>
+                <a class="btn btn-warning" (click)="getEmployeeById(employee.idEmployee)" data-bs-toggle="modal" data-bs-target="#modalEmployee"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a>
+                <!-- start Delete -->
+                <a class="btn btn-warning"  (click)="inactivateEmployee(employee.idEmployee)" *ngIf="employee.statusEmployee == true"><i-bs name="eye-slash-fill"  width="15px"  height="15px"></i-bs></a>
+                <!-- end Delete -->
+                <a class="btn btn-warning" (click)="activateEmployee(employee.idEmployee)" *ngIf="employee.statusEmployee == false"><i-bs name="eye-fill"  width="15px"  height="15px"></i-bs></a>
+              <td>
             </tr>
           </tbody>
         </table>
@@ -66,24 +72,27 @@
         <h5 class="mb-0 text-info">Employee data</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <form [formGroup]="formEmployee" (ngSubmit)="sendForm(formEmployee.value)">
       <div class="modal-body">
+        <input type="hidden" formControlName="idEmployee">
         <div class="row">
           <div class="col">
-            <label for="Genre" class="form-label">Name:</label>
-            <input type="Text" class="form-control" id="Genre">
+            <label for="nameEmployee" class="form-label">Name:</label>
+            <input type="Text" class="form-control" id="nameEmployee" formControlName="nameEmployee">
           </div>
           <div class="col">
-            <label for="Genre" class="form-label">Carnet:</label>
-            <input type="Text" class="form-control" id="Genre">
+            <label for="employeeNumber" class="form-label">Carnet:</label>
+            <input type="Text" class="form-control" id="employeeNumber" formControlName="employeeNumber">
           </div>
           <div class="col">
-            <label for="statusAuthor" class="form-label"
-                >Status:</label
+                <label for="statusEmployee" class="form-label"
+                >Status:
+                </label
               >
             <select
                 class="form-select"
                 aria-label="Default select example"
-                formControlName="statusAuthor"
+                formControlName="statusEmployee"
               >
                 <option value="0" >Inactive</option>
                 <option value="1" >Active</option>
@@ -93,12 +102,10 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
-
-
-
 <app-footer></app-footer>

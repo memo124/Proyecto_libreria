@@ -31,12 +31,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let rack of racks | rack:filterName">
+            <tr *ngFor="let rack of rack | rack:filterName">
               <td>{{rack.idRack}}</td>
               <td>{{rack.nameRack}}</td>
               <td>{{rack.levels}}</td>
-              <td>{{rack.statusRack}}</td>
-              <td><a class="btn btn-warning"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
+              <td>{{viewStatus(rack.statusRack)}}</td>
+              <td>
+                <a class="btn btn-warning" (click)="getRacksById(rack.idRack)" data-bs-toggle="modal" data-bs-target="#modalShelft"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a>
+                <!-- start Delete -->
+                <a class="btn btn-warning"  (click)="inactivateRack(rack.idRack)" *ngIf="rack.statusRack == true"><i-bs name="eye-slash-fill"  width="15px"  height="15px"></i-bs></a>
+                <!-- end Delete -->
+                <a class="btn btn-warning" (click)="activateRack(rack.idRack)" *ngIf="rack.statusRack == false"><i-bs name="eye-fill"  width="15px"  height="15px"></i-bs></a>
+              <td>
             </tr>
           </tbody>
         </table>
@@ -65,37 +71,40 @@
         <h5 class="mb-0 text-info">Shelft data</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col">
-            <label for="nameAuthor" class="form-label">Name:</label>
-            <input type="Text" class="form-control" id="nameAuthor">
-          </div>
-          <div class="col">
-            <label for="dateAuthor" class="form-label">Date born:</label>
-            <input type="date" class="form-control" id="dateAuthor">
-          </div>
-          <div class="col">
-            <label for="statusAuthor" class="form-label"
-                >Status:</label
-              >
-            <select
-                class="form-select"
-                aria-label="Default select example"
-                formControlName="statusAuthor"
-              >
-                <option value="0" >Inactive</option>
-                <option value="1" >Active</option>
-              </select>
+      <form [formGroup]="formRack" (ngSubmit)="sendForm(formRack.value)">
+        <div class="modal-body">
+          <input type="hidden" formControlName="idRack">
+          <div class="row">
+            <div class="col">
+              <label for="nameRack" class="form-label">Name:</label>
+              <input type="Text" class="form-control" id="nameRack" formControlName="nameRack">
+            </div>
+            <div class="col">
+              <label for="levels" class="form-label">Levels:</label>
+              <input type="Text" class="form-control" id="levels" formControlName="levels">
+            </div>
+            <div class="col">
+                  <label for="statusRack" class="form-label"
+                  >Status:
+                  </label
+                >
+              <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  formControlName="statusRack"
+                >
+                  <option value="0" >Inactive</option>
+                  <option value="1" >Active</option>
+                </select>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+        </form>
       </div>
     </div>
   </div>
-</div>
-
-<app-footer></app-footer>
+  <app-footer></app-footer>
