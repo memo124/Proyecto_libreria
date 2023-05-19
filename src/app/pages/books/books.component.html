@@ -215,13 +215,19 @@ aria-hidden="true"
            <div *ngFor="let user of userData">
             <div class="row" style="padding-bottom: 15px;">
               <div class="col-4"><b>Name: </b>{{user.nameUser}}</div>
-              <div class="col-6"><b>Email: </b>{{user.emailUser}}</div>
-              <div class="col-2"><b>Phone:</b>{{user.phoneUser}}</div>
+              <div class="col-5"><b>Email: </b>{{user.emailUser}}</div>
+              <div class="col-3"><b>Phone:</b>{{user.phoneUser}}</div>
             </div>
             <div class="row" style="padding-bottom: 15px;">
               <div class="col-4">
-                <label for="reservationDate" class="form-label">Reservation date:</label>
-                <input type="text" class="form-control" id="reservationDate" name="reservationDate">
+                <label for="reservationDate" class="form-label"><b>Reservation date</b></label>
+                <input type="date" class="form-control" id="reservationDate" name="reservationDate">
+              </div>
+              <div class="col-4">
+                <label for="idEmployee" class="form-label"><b>Employee</b></label>
+                <select name="idEmployee" id="idEmployee" class="form-control">
+                  <option value="{{employee.idEmployee}}" *ngFor="let employee of employees">{{employee.nameEmployee}}</option>
+                </select>
               </div>
             </div>
           </div>

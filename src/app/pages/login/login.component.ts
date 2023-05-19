@@ -37,8 +37,8 @@ export class LoginComponent {
   async onLogin(form:object){
     this.loginS.postLogin(form).subscribe(data=>{
        localStorage.setItem('token',data.toString());
+       this.router.navigate(['book']);
     });
-    this.router.navigate(['book']);
   }
 
 }

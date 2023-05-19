@@ -31,7 +31,6 @@ export class BooksService {
   }
 
   putBook(idBook:number,form:object):Observable<responseI>{
-    console.log(idBook);
     let direction = `${environment.uri}Book/`+idBook;
     return this.http.put<responseI>(direction,form,this.httpOptions);
   }

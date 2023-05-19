@@ -5,12 +5,14 @@ import { classHelper } from 'src/app/helpers/helper';
 import { authorI } from 'src/app/interfaces/author.interface';
 import { booksI } from 'src/app/interfaces/books.interface';
 import { editorialI } from 'src/app/interfaces/editorial.interface';
+import { employeeI } from 'src/app/interfaces/employee.interface';
 import { genreI } from 'src/app/interfaces/genre.interface';
 import { rackI } from 'src/app/interfaces/rack.interface';
 import { userI } from 'src/app/interfaces/user.interface';
 import { AuthorService } from 'src/app/services/author/author.service';
 import { BooksService } from 'src/app/services/books/books.service';
 import { EditorialService } from 'src/app/services/editorial/editorial.service';
+import { EmployeeService } from 'src/app/services/employee/employee.service';
 import { GenreService } from 'src/app/services/genre/genre.service';
 import { RackService } from 'src/app/services/rack/rack.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -30,6 +32,7 @@ export class BooksComponent implements OnInit {
   public authors: authorI[] = [];
   public genres: genreI[] = [];
   public editorials: editorialI[] = [];
+  public employees: employeeI[] =[];
   public racks: rackI[] = [];
   public formBook: FormGroup;
   public carnet: number;
@@ -40,7 +43,7 @@ export class BooksComponent implements OnInit {
   public img: string = "";
   public base64:any;
 
-  constructor(private userS:UserService,private helper:classHelper,private rackS:RackService,private editorialS:EditorialService,private sanitizer: DomSanitizer, private bookS:BooksService,private authorS:AuthorService,private genreS:GenreService) {
+  constructor(private employeeS:EmployeeService,private userS:UserService,private helper:classHelper,private rackS:RackService,private editorialS:EditorialService,private sanitizer: DomSanitizer, private bookS:BooksService,private authorS:AuthorService,private genreS:GenreService) {
     this.formBook = new FormGroup({
       bookName: new FormControl(),
       publicationDate: new FormControl(),
@@ -66,6 +69,17 @@ export class BooksComponent implements OnInit {
   getDataBookReservate(idBook:number){
     this.bookS.getBookById(idBook).subscribe(data=>{
       this.dataBookReserve  = data;
+    });
+  }
+
+  getAllEmployees(){
+    this.employeeS.getEmployees().subscribe({
+      next: data=>{
+        this.employees = data;
+      },
+      error: err=>{
+        console.error(err);
+      }
     });
   }
 
@@ -104,6 +118,7 @@ export class BooksComponent implements OnInit {
   searchUser(){
     this.userS.getUserById(this.carnet).subscribe(data=>{
       this.userData = data;
+      this.getAllEmployees();
     });
   }
 
