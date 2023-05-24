@@ -29,4 +29,20 @@ export class GenreService {
     let directions = `${environment.uri}Genre`;
     return this.http.post<responseI>(directions,form,this.httpOptions)
   }
+
+  getGenreById(idGenre:number): Observable<genreI[]> {
+    let directions = `${environment.uri}Genre/${idGenre}`;
+    return this.http.get<genreI[]>(directions, this.httpOptions);
+  }
+
+  deleteGenre(idGenre: number): Observable<responseI> {
+    let directions = `${environment.uri}Genre/` + idGenre;
+    return this.http.delete<responseI>(directions, this.httpOptions);
+  }
+
+  putActivateGenre(idGenre: number): Observable<responseI> {
+    let directions = `${environment.uri}Genre/Activate/` + idGenre;
+    return this.http.put<responseI>(directions, '', this.httpOptions);
+  }
+
 }

@@ -35,8 +35,10 @@
               <td>{{genre.nameGenre}}</td>
               <td>{{genre.statusGenre}}</td>
               <td>
-                <a class="btn btn-warning"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a>
-                <!-- <a class="btn btn-warning"  (click)="inactivateAuthor(genre.idGenre)"><i-bs name="eye-slash-fill"  width="15px"  height="15px"></i-bs></a> -->
+                <a class="btn btn-warning" data-bs-toggle="modal"
+                data-bs-target="#modalGenre" (click)="getDataGenres(genre.idGenre)"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a>
+                <a class="btn btn-warning"  (click)="inactivateGenre(genre.idGenre)" *ngIf="genre.statusGenre == true"><i-bs name="eye-slash-fill"  width="15px"  height="15px"></i-bs></a>
+                <a class="btn btn-warning" (click)="activateGenre(genre.idGenre)" *ngIf="genre.statusGenre == false"><i-bs name="eye-fill"  width="15px"  height="15px"></i-bs></a>
               </td>
             </tr>
           </tbody>

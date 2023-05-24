@@ -14,6 +14,7 @@ export class GenreComponent implements OnInit {
   public genres: genreI[] = [];
   public filterName: string = "";
   public formGenre: FormGroup;
+  public dataGenre: genreI;
 
   constructor(public genreS:GenreService, private helper:classHelper){
     this.formGenre = new FormGroup({
@@ -25,6 +26,23 @@ export class GenreComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllGenres();
+  }
+
+  getDataGenres(idGenre: number):void {
+    this.genreS.getGenreById(idGenre).subscribe(genres =>{
+      let data = genres[0];
+      this.formGenre.setValue({
+        'nameGenre': data.nameGenre,
+        'statusGenre': data.statusGenre
+      });
+    });
+  }
+
+  activateGenre(idGenre:number): void {
+    this.genreS.putActivateGenre(idGenre).subscribe(data => {
+      this.helper.messageAlert('Success',data.response,'success', 'Accepted');
+      this.getAllGenres();
+    });
   }
 
   getAllGenres(): void {
@@ -39,4 +57,11 @@ export class GenreComponent implements OnInit {
       this.getAllGenres();
     });
   }
+
+  inactivateGenre(idGenre:number): void {
+    this.genreS.deleteGenre(idGenre).subscribe(data => {
+      this.helper.messageAlert('Success',data.response,'success', 'Accepted');
+      this.getAllGenres();
+    });
+}
 }
