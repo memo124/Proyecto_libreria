@@ -1,21 +1,31 @@
 <app-header></app-header>
 
-<br>
+<br />
 <div class="container">
-  <div class="row" >
-    <div class="card radius-10" style="padding: 5px;">
+  <div class="row">
+    <div class="card radius-10" style="padding: 5px">
       <div class="row">
         <div class="col-4">
-          <button class="btn btn-primary" data-bs-toggle="modal"
-          data-bs-target="#modalEmployee">Add</button>
+          <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#modalEmployee"
+          >
+            Add
+          </button>
         </div>
         <div class="col-4">
-          <input type="text" class="form-control" placeholder="Search for name" [(ngModel)]="filterName">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search for name"
+            [(ngModel)]="filterName"
+          />
         </div>
       </div>
     </div>
   </div>
-  <br>
+  <br />
 
   <div class="row align-items-center">
     <div class="card radius-10">
@@ -31,12 +41,36 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let employee of employees | employee:filterName">
-              <td>{{employee.idEmployee}}</td>
-              <td>{{employee.nameEmployee}}</td>
-              <td>{{employee.employeeNumber}}</td>
-              <td>{{viewStatus(employee.statusEmployee)}}</td>
-              <td><a class="btn btn-warning"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a></td>
+            <tr *ngFor="let employee of employees | employee : filterName">
+              <td>{{ employee.idEmployee }}</td>
+              <td>{{ employee.nameEmployee }}</td>
+              <td>{{ employee.employeeNumber }}</td>
+              <td>{{ viewStatus(employee.statusEmployee) }}</td>
+              <td>
+                <a
+                  class="btn btn-warning"
+                  (click)="getEmployeeById(employee.idEmployee)"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalEmployee"
+                  ><i-bs name="pen-fill" width="15px" height="15px"></i-bs
+                ></a>
+                <!-- start Delete -->
+                <a
+                  class="btn btn-warning"
+                  (click)="inactivateEmployee(employee.idEmployee)"
+                  *ngIf="employee.statusEmployee == true"
+                  ><i-bs name="eye-slash-fill" width="15px" height="15px"></i-bs
+                ></a>
+                <!-- end Delete -->
+                <a
+                  class="btn btn-warning"
+                  (click)="activateEmployee(employee.idEmployee)"
+                  *ngIf="employee.statusEmployee == false"
+                  ><i-bs name="eye-fill" width="15px" height="15px"></i-bs
+                ></a>
+              </td>
+
+              <td></td>
             </tr>
           </tbody>
         </table>
@@ -44,7 +78,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- Modal fade employee -->
 <div
@@ -54,51 +87,76 @@
   aria-labelledby="modalEmployee"
   aria-hidden="true"
 >
-  <div class="modal-dialog"
+  <div
+    class="modal-dialog"
     id="modalEmployee"
     tabindex="-1"
     aria-labelledby="modalEmployee"
-    aria-hidden="true">
+    aria-hidden="true"
+  >
     <div class="modal-content">
       <div class="modal-header">
-        <div><i class="bx bxs-user me-1 font-22 text-info"></i>
-        </div>
+        <div><i class="bx bxs-user me-1 font-22 text-info"></i></div>
         <h5 class="mb-0 text-info">Employee data</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col">
-            <label for="Genre" class="form-label">Name:</label>
-            <input type="Text" class="form-control" id="Genre">
-          </div>
-          <div class="col">
-            <label for="Genre" class="form-label">Carnet:</label>
-            <input type="Text" class="form-control" id="Genre">
-          </div>
-          <div class="col">
-            <label for="statusAuthor" class="form-label"
-                >Status:</label
-              >
-            <select
+      <form
+        [formGroup]="formEmployee"
+        (ngSubmit)="sendForm(formEmployee.value)"
+      >
+        <div class="modal-body">
+          <input type="hidden" formControlName="idEmployee" />
+          <div class="row">
+            <div class="col">
+              <label for="nameEmployee" class="form-label">Name:</label>
+              <input
+                type="Text"
+                class="form-control"
+                id="nameEmployee"
+                formControlName="nameEmployee"
+              />
+            </div>
+            <div class="col">
+              <label for="employeeNumber" class="form-label">Carnet:</label>
+              <input
+                type="Text"
+                class="form-control"
+                id="employeeNumber"
+                formControlName="employeeNumber"
+              />
+            </div>
+            <div class="col">
+              <label for="statusEmployee" class="form-label">Status:</label>
+              <select
                 class="form-select"
                 aria-label="Default select example"
-                formControlName="statusAuthor"
+                formControlName="statusEmployee"
               >
-                <option value="0" >Inactive</option>
-                <option value="1" >Active</option>
+                <option value="0">Inactive</option>
+                <option value="1">Active</option>
               </select>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </form>
     </div>
   </div>
+
+  <app-footer></app-footer>
 </div>
-
-
-
-<app-footer></app-footer>
