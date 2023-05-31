@@ -21,7 +21,7 @@ export class AuthorService {
   };
 
   getAuthor():Observable<authorI[]>{
-    let direction = `${environment.uri}Author`;
+    let direction = `${environment.uri}Author?page=1&limit=100&actives=false`;
     return this.http.get<authorI[]>(direction, this.httpOptions).pipe(
         retry(3),
         map(resp=>resp),

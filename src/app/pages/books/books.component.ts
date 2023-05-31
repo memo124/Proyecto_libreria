@@ -15,6 +15,7 @@ import { EditorialService } from 'src/app/services/editorial/editorial.service';
 import { EmployeeService } from 'src/app/services/employee/employee.service';
 import { GenreService } from 'src/app/services/genre/genre.service';
 import { RackService } from 'src/app/services/rack/rack.service';
+import { ReserveService } from 'src/app/services/reserve/reserve.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -36,14 +37,21 @@ export class BooksComponent implements OnInit {
   public racks: rackI[] = [];
   public formBook: FormGroup;
   public carnet: number;
+  public cbEmployees: number;
   public userData: userI[] = [];
   public previsualizacion?: string;
   public idBook: number = 0;
   public archivos: any = [];
   public img: string = "";
   public base64:any;
+  public idEmploye: number = 0;
+  public reserve: FormGroup;
 
-  constructor(private employeeS:EmployeeService,private userS:UserService,private helper:classHelper,private rackS:RackService,private editorialS:EditorialService,private sanitizer: DomSanitizer, private bookS:BooksService,private authorS:AuthorService,private genreS:GenreService) {
+  constructor(private reserveS:ReserveService,private employeeS:EmployeeService,private userS:UserService,private helper:classHelper,private rackS:RackService,private editorialS:EditorialService,private sanitizer: DomSanitizer, private bookS:BooksService,private authorS:AuthorService,private genreS:GenreService) {
+    this.reserve = new FormGroup({
+      idEmployee: new FormControl()
+    });
+
     this.formBook = new FormGroup({
       bookName: new FormControl(),
       publicationDate: new FormControl(),
@@ -53,6 +61,13 @@ export class BooksComponent implements OnInit {
       idEditorial: new FormControl(),
       idGenre: new FormControl(),
       idRack: new FormControl()
+    });
+  }
+
+  sendReserve(idUser:number,idBook:number,idEmployee:number):void {
+    let array = {'idUser':idUser, 'idBook':idBook, 'idEmployee':idEmployee};
+    this.reserveS.postReserve(array).subscribe(data=>{
+      this.helper.messageAlert('Successfully',data.response,'success','Accepted');
     });
   }
 
@@ -69,17 +84,13 @@ export class BooksComponent implements OnInit {
   getDataBookReservate(idBook:number){
     this.bookS.getBookById(idBook).subscribe(data=>{
       this.dataBookReserve  = data;
+      this.idBook = data[0].idBook;
     });
   }
 
   getAllEmployees(){
-    this.employeeS.getEmployees().subscribe({
-      next: data=>{
+    this.employeeS.getEmployees().subscribe(data=>{
         this.employees = data;
-      },
-      error: err=>{
-        console.error(err);
-      }
     });
   }
 
@@ -138,7 +149,6 @@ export class BooksComponent implements OnInit {
     this.bookS.getBookById(idBook).subscribe(data=>{
        this.dataBook = data[0];
        this.getCombox();
-       console.log(this.dataBook.idBook);
        this.idBook = this.dataBook.idBook;
        this.formBook.setValue({
         'bookName': this.dataBook.bookName,

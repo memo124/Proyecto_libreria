@@ -16,6 +16,7 @@ export class AuthorComponent implements OnInit {
   public filterName: string = "";
   public formAuthor: FormGroup;
   public idAuthor: number = 0;
+  public p: number = 1;
 
   constructor(private authorS:AuthorService,private helper:classHelper){
     this.formAuthor = new FormGroup({

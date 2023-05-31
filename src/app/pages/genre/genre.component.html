@@ -30,10 +30,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let genre of  genres | genre:filterName">
+            <tr *ngFor="let genre of  (genres | genre:filterName) | paginate : { itemsPerPage: 10, currentPage: p };">
               <td>{{genre.idGenre}}</td>
               <td>{{genre.nameGenre}}</td>
-              <td>{{genre.statusGenre}}</td>
+              <td>{{viewStatus(genre.statusGenre)}}</td>
               <td>
                 <a class="btn btn-warning" data-bs-toggle="modal"
                 data-bs-target="#modalGenre" (click)="getDataGenres(genre.idGenre)"><i-bs name="pen-fill"  width="15px"  height="15px"></i-bs></a>
@@ -43,6 +43,11 @@
             </tr>
           </tbody>
         </table>
+        <pagination-controls
+        (pageChange)="p = $event"
+        previousLabel="Before"
+        nextLabel="After"
+      ></pagination-controls>
       </div>
     </div>
   </div>

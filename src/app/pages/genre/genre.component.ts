@@ -15,10 +15,12 @@ export class GenreComponent implements OnInit {
   public filterName: string = "";
   public formGenre: FormGroup;
   public dataGenre: genreI;
+  public idGenre: number = 0;
+  public p: number = 1;
+
 
   constructor(public genreS:GenreService, private helper:classHelper){
     this.formGenre = new FormGroup({
-      // idGenre: new FormControl(),
       nameGenre: new FormControl(),
       statusGenre: new FormControl()
     });
@@ -30,12 +32,17 @@ export class GenreComponent implements OnInit {
 
   getDataGenres(idGenre: number):void {
     this.genreS.getGenreById(idGenre).subscribe(genres =>{
-      let data = genres[0];
+      let data = genres;
+      this.idGenre = data.idGenre;
       this.formGenre.setValue({
         'nameGenre': data.nameGenre,
         'statusGenre': data.statusGenre
       });
     });
+  }
+
+  viewStatus(status:boolean){
+    return this.helper.viewStatus(status)
   }
 
   activateGenre(idGenre:number): void {

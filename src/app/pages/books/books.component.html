@@ -214,18 +214,14 @@ aria-hidden="true"
             </div>
            <div *ngFor="let user of userData">
             <div class="row" style="padding-bottom: 15px;">
-              <div class="col-4"><b>Name: </b>{{user.nameUser}}</div>
+              <div class="col-4"><b>Name user: </b>{{user.nameUser}}</div>
               <div class="col-5"><b>Email: </b>{{user.emailUser}}</div>
-              <div class="col-3"><b>Phone:</b>{{user.phoneUser}}</div>
+              <div class="col-3"><b>Phone: </b>{{user.phoneUser}}</div>
             </div>
             <div class="row" style="padding-bottom: 15px;">
               <div class="col-4">
-                <label for="reservationDate" class="form-label"><b>Reservation date</b></label>
-                <input type="date" class="form-control" id="reservationDate" name="reservationDate">
-              </div>
-              <div class="col-4">
                 <label for="idEmployee" class="form-label"><b>Employee</b></label>
-                <select name="idEmployee" id="idEmployee" class="form-control">
+                <select name="idEmployee" id="idEmployee" class="form-control" [(ngModel)]="cbEmployees">
                   <option value="{{employee.idEmployee}}" *ngFor="let employee of employees">{{employee.nameEmployee}}</option>
                 </select>
               </div>
@@ -236,7 +232,7 @@ aria-hidden="true"
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="sendReserve(cbEmployees,idBook,carnet)" >Save reserve</button>
       </div>
     </div>
   </div>

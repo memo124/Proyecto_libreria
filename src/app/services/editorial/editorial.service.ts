@@ -19,7 +19,7 @@ export class EditorialService {
   };
 
   getEditorial(): Observable<editorialI[]> {
-    let direction = `${environment.uri}Editorial`;
+    let direction = `${environment.uri}Editorial?page=1&limit=1000&actives=false`;
     return this.http.get<editorialI[]>(direction, this.httpOptions).pipe(
       retry(3),
       map((resp) => resp),
@@ -29,9 +29,9 @@ export class EditorialService {
     );
   }
 
-  getEditorialById(idEditorial: number): Observable<editorialI[]> {
+  getEditorialById(idEditorial: number): Observable<editorialI> {
     let direction = `${environment.uri}Editorial/` + idEditorial;
-    return this.http.get<editorialI[]>(direction, this.httpOptions).pipe(
+    return this.http.get<editorialI>(direction, this.httpOptions).pipe(
       retry(3),
       map((resp) => resp),
       catchError((error) => {

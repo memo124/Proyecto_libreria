@@ -20,7 +20,7 @@ export class EmployeeService {
   };
 
   getEmployees(): Observable<employeeI[]> {
-    let directions = `${environment.uri}Employee`;
+    let directions = `${environment.uri}Employee?page=1&limit=1000&actives=false`;
     return this.http.get<employeeI[]>(directions,this.httpOptions).pipe(
       retry(3),
       map(resp=>resp),

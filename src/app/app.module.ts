@@ -13,6 +13,7 @@ import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

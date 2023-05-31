@@ -16,6 +16,7 @@ export class EmployeeComponent implements OnInit {
   public formEmployee: FormGroup;
   public idEmployee: number = 0;
   public dataEmployee: employeeI ;
+  public p: number = 1;
 
   constructor(private employeeS:EmployeeService,private helper:classHelper){
     this.formEmployee = new FormGroup({

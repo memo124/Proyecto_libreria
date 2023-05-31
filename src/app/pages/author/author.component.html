@@ -33,7 +33,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let author of authors | author:filterName">
+            <tr *ngFor="let author of (authors | author:filterName) | paginate : { itemsPerPage: 10, currentPage: p };">
               <td>{{author.idAuthor}}</td>
               <td>{{author.nameAuthor}}</td>
               <td>{{author.countryBirth}}</td>
@@ -49,6 +49,11 @@
             </tr>
           </tbody>
         </table>
+        <pagination-controls
+        (pageChange)="p = $event"
+        previousLabel="Before"
+        nextLabel="After"
+      ></pagination-controls>
       </div>
     </div>
   </div>

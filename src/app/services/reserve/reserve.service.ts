@@ -33,13 +33,18 @@ export class ReserveService {
     return this.http.put<responseI>(direction,form, this.httpOptions);
   }
 
-  putActivateReserve(idReserve:number){
+  putActivateReserve(idReserve:number):Observable<responseI>{
     let direction = `${environment.uri}Reserve/Activate/`+idReserve;
     return this.http.put<responseI>(direction,'', this.httpOptions);
   }
 
-  deleteReserve(idReserve:number){
+  deleteReserve(idReserve:number):Observable<responseI>{
     let direction = `${environment.uri}Reserve/`+idReserve;
     return this.http.delete<responseI>(direction, this.httpOptions);
+  }
+
+  postReserve(form:object):Observable<responseI>{
+    let direction = `${environment.uri}Reserve`;
+    return this.http.post<responseI>(direction,form,this.httpOptions)
   }
 }

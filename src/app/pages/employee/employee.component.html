@@ -41,7 +41,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let employee of employees | employee : filterName">
+            <tr *ngFor="let employee of (employees | employee : filterName) | paginate : { itemsPerPage: 10, currentPage: p };">
               <td>{{ employee.idEmployee }}</td>
               <td>{{ employee.nameEmployee }}</td>
               <td>{{ employee.employeeNumber }}</td>
@@ -69,11 +69,14 @@
                   ><i-bs name="eye-fill" width="15px" height="15px"></i-bs
                 ></a>
               </td>
-
-              <td></td>
             </tr>
           </tbody>
         </table>
+        <pagination-controls
+        (pageChange)="p = $event"
+        previousLabel="Before"
+        nextLabel="After"
+      ></pagination-controls>
       </div>
     </div>
   </div>

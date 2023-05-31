@@ -14,14 +14,14 @@ export class EditorialComponent implements OnInit {
   public filterName: string = '';
   public dataEditorial: editorialI;
   public formEditorial: FormGroup;
-  public idEditorial: number = 0;
+  public idEditor: number = 0;
+  public p: number = 1;
 
   constructor(
     private editorialS: EditorialService,
     private helper: classHelper
   ) {
     this.formEditorial = new FormGroup({
-      idEditorial: new FormControl('', Validators.required),
       nameEditorial: new FormControl('', [
         Validators.pattern(this.helper.validateSting()),
       ]),
@@ -41,9 +41,9 @@ export class EditorialComponent implements OnInit {
   }
 
   sendForm(form: object) {
-    if (this.idEditorial != 0) {
+    if (this.idEditor != 0) {
       this.editorialS
-        .putEditorial(form, this.idEditorial)
+        .putEditorial(form, this.idEditor)
         .subscribe((editorial) => {
           this.helper.messageAlert(
             'Successfully',
@@ -72,13 +72,12 @@ export class EditorialComponent implements OnInit {
 
   getEditorialById(idEditorial: number) {
     this.editorialS.getEditorialById(idEditorial).subscribe((data) => {
-      this.dataEditorial = data[0];
-      this.idEditorial = this.dataEditorial.idEditorial;
+      this.dataEditorial = data;
+      this.idEditor = this.dataEditorial.idEditorial;
       this.formEditorial.setValue({
-        idEditorial: this.dataEditorial.idEditorial,
-        nameEditorial: this.dataEditorial.nameEditorial,
-        dateAdd: this.dataEditorial.dateAdd,
-        statusEditorial: this.dataEditorial.statusEditorial,
+        'nameEditorial': this.dataEditorial.nameEditorial,
+        'dateAdd': this.dataEditorial.dateAdd,
+        'statusEditorial': this.dataEditorial.statusEditorial,
       });
     });
   }

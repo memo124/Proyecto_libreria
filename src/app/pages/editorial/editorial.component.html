@@ -31,7 +31,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let editorial of editorials | editorial:filterName">
+            <tr *ngFor="let editorial of (editorials | editorial:filterName) | paginate : { itemsPerPage: 10, currentPage: p };">
               <td>{{editorial.idEditorial}}</td>
               <td>{{editorial.nameEditorial}}</td>
               <td>{{editorial.dateAdd | date:'dd-MM-yyyy'}}</td>
@@ -46,6 +46,11 @@
             </tr>
           </tbody>
         </table>
+        <pagination-controls
+        (pageChange)="p = $event"
+        previousLabel="Before"
+        nextLabel="After"
+      ></pagination-controls>
       </div>
     </div>
   </div>
@@ -73,7 +78,6 @@
       </div>
       <form [formGroup]="formEditorial" (ngSubmit)="sendForm(formEditorial.value)">
         <div class="modal-body">
-          <input type="hidden" formControlName="idEditorial">
           <div class="row">
             <div class="col">
               <label for="nameEditorial" class="form-label">Name:</label>
