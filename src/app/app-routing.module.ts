@@ -22,7 +22,7 @@ import { LoginGuard } from './pages/login/login.guard';
 
 const routes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
-  {path:'login',component: LoginComponent, canActivate:[LoginGuard]},
+  {path:'login',component: LoginComponent},
   {path:'book',component: BooksComponent,canActivate:[LoginGuard]},
   {path:'editorial',component: EditorialComponent,canActivate:[LoginGuard]},
   {path:'employee',component:EmployeeComponent,canActivate:[LoginGuard]},

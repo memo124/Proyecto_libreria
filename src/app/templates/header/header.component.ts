@@ -25,6 +25,11 @@ export class HeaderComponent implements OnInit{
 
   }
 
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['/login']);
+  }
+
   redirect(route:string){
     this.router.navigate([route]);
   }
