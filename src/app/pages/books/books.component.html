@@ -20,7 +20,7 @@
 
 <!-- <div class="row"> -->
   <div class="container">
-    <div class="row" *ngFor="let book of books | paginate : { itemsPerPage: 4, currentPage: p };">
+    <div class="row" *ngFor="let book of books | paginate : { itemsPerPage: 7, currentPage: p };">
       <div class="card description" >
         <div class="row">
           <div class="col-4">Title:{{book.bookName}}</div>
@@ -29,21 +29,23 @@
         <div class="row">
           <div class="col-4">Author:{{book.Author.nameAuthor}}</div>
           <div class="col-4">Editorial:{{book.Editorial.nameEditorial}}</div>
-        </div>
-        <div class="row">
-          <div class="col-6">{{book.bookCover}}
-          </div>
-          <div class="col-2"><img src="assets/img/descarga.png" alt="" class="img-thumbnail imagen"></div>
-          <div class="col-2">
-            <a class="btn btn-warning"  (click)="inactivateAuthor(book.idBook)" *ngIf="book.statusBook == true"><i-bs name="eye-slash-fill"  width="15px"  height="15px"></i-bs></a>
-            <a class="btn btn-warning" (click)="activateAuthor(book.idBook)" *ngIf="book.statusBook == false"><i-bs name="eye-fill"  width="15px"  height="15px"></i-bs></a>
-          </div>
-          <div class="col-2">
-            <button class="btn btn-outline-success"  data-bs-toggle="modal"
-            data-bs-target="#modalBook" (click)="getDataBook(book.idBook)">Edit</button>
-            &nbsp;
-            <button class="btn btn-outline-success" data-bs-toggle="modal"
-            data-bs-target="#modalReserve" (click)="getDataBookReservate(book.idBook)">Reserve</button>
+          <div class="col-4">
+            <div class="row">
+              <div class="col">
+                <a class="btn btn-warning"  (click)="inactivateAuthor(book.idBook)" *ngIf="book.statusBook == true"><i-bs name="eye-slash-fill"  width="15px"  height="15px"></i-bs></a>
+                <a class="btn btn-warning" (click)="activateAuthor(book.idBook)" *ngIf="book.statusBook == false"><i-bs name="eye-fill"  width="15px"  height="15px"></i-bs></a>
+                &nbsp;
+              </div>
+              <div class="col">
+                <button class="btn btn-outline-success"  data-bs-toggle="modal"
+                data-bs-target="#modalBook" (click)="getDataBook(book.idBook)">Edit</button>
+                &nbsp;
+              </div>
+              <div class="col">
+                <button class="btn btn-outline-success" data-bs-toggle="modal"
+                data-bs-target="#modalReserve" (click)="getDataBookReservate(book.idBook)">Reserve</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -78,15 +80,6 @@
         </div>
         <form [formGroup]="formBook" (ngSubmit)="sendForm(formBook.value)">
           <div class="modal-body">
-            <div class="row">
-              <div class="col align-items-center">
-                <div *ngIf="previsualizacion" style="display: flex; justify-content: center;">
-                  <img [src]="previsualizacion" src="{{img}}" alt="Admin" class="p-1 bg-success" width="250" height="250" id="inputGroupFileAddon04" >
-                </div>
-                <br>
-                <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" (change)="capturarFile($event)" formControlName="txtimg">
-              </div>
-            </div>
             <div class="row">
               <div class="col">
                 <label for="bookName" class="form-label">Title:</label>
@@ -143,20 +136,10 @@
                 <input type="text" class="form-control" name="quantityStock" id="quantityStock" formControlName="quantityStock">
               </div>
               <div class="col">
-                <label for="totalPague" class="form-label">Pagues:</label>
-                <input type="number" class="form-control" name="totalPague" id="totalPague" formControlName="totalPague">
-              </div>
-              <div class="col">
                 <label for="publicationDate" class="form-label">Publication date:</label>
                 <input type="date" class="form-control" name="publicationDate" id="publicationDate" formControlName="publicationDate">
               </div>
             </div>
-            <!-- <div class="row">
-              <div class="col">
-                <label for="floatingTextarea2">Description:</label>
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-              </div>
-            </div> -->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -189,18 +172,13 @@ aria-hidden="true"
       <div class="modal-body">
         <div class="row" style="padding: 15px;">
           <div class="card" *ngFor="let book of dataBookReserve">
-            <div class="row">
-              <div class="col-4">Title:{{book.bookName}}</div>
-              <div class="col-4">Genre:{{book.Genre.nameGenre}}</div>
+            <div class="row mb-3">
+              <div class="col-6">Title:{{book.bookName}}</div>
+              <div class="col-6">Genre:{{book.Genre.nameGenre}}</div>
             </div>
             <div class="row">
-              <div class="col-4">Author:{{book.Author.nameAuthor}}</div>
-              <div class="col-4">Editorial:{{book.Editorial.nameEditorial}}</div>
-            </div>
-            <div class="row">
-              <div class="col-8">{{book.bookCover}}
-              </div>
-              <div class="col-4"><img src="assets/img/descarga.png" alt="" class="img-thumbnail imagen"></div>
+              <div class="col-6">Author:{{book.Author.nameAuthor}}</div>
+              <div class="col-6">Editorial:{{book.Editorial.nameEditorial}}</div>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  uri:'https://libraryapi-main.onrender.com/'
+  uri:'https://libraryapidev.onrender.com/'
 };

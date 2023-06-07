@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, retry, throwError  } from 'rxjs';
 import { authorI } from 'src/app/interfaces/author.interface';
@@ -45,40 +45,56 @@ export class AuthorService {
   postAuthor(form:object):Observable<responseI>{
     let direction = `${environment.uri}Author`;
     return this.http.post<responseI>(direction, form,this.httpOptions).pipe(
+      retry(3),
       map(resp=>resp),
-       catchError((error) => {
-        return throwError(() => error);
-      })
-    )
+      // tap(data => console.log('All: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    );
   }
 
   putAuthor(form:object,idAuthor:number):Observable<responseI>{
     let direction = `${environment.uri}Author/`+idAuthor;
     return this.http.put<responseI>(direction, form,this.httpOptions).pipe(
+      retry(3),
       map(resp=>resp),
-       catchError((error) => {
-        return throwError(() => error);
-      })
-    )
+      // tap(data => console.log('All: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    );
   }
 
   putAuthorActivate(idAuthor:number):Observable<responseI>{
     let direction = `${environment.uri}Author/Activate/`+idAuthor;
     return this.http.put<responseI>(direction,'',this.httpOptions).pipe(
+      retry(3),
       map(resp=>resp),
-       catchError((error) => {
-        return throwError(() => error);
-      })
-    )
+      // tap(data => console.log('All: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    );
   }
 
   deleteAuthor(idAuthor:number):Observable<responseI>{
     let direction = `${environment.uri}Author/`+idAuthor;
-    return this.http.delete<responseI>(direction,this.httpOptions).pipe(
-      map(resp=>resp),
-       catchError((error) => {
-        return throwError(() => error);
-      })
-    )
+    return this.http.delete<responseI>(direction,this.httpOptions)
+      .pipe(
+        retry(3),
+        map(resp=>resp),
+        // tap(data => console.log('All: ', JSON.stringify(data))),
+        catchError(this.handleError)
+    );
+  }
+
+  public handleError(error: HttpErrorResponse) {
+    let errorMessage = "";
+    if (error.status === 0) {
+      // A client-side or network error occurred. Handle it accordingly.
+      errorMessage = 'Error en la conexión'+error.error+'';
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+        errorMessage=`Problemas con el servidor, codigo de estado:${error.status}, Mensaje: `, error.error;
+    }
+    // Return an observable with a user-facing error message.
+    errorMessage+=' Ocurrio un problema; Contactarse con IT.'
+    return throwError(() => new Error(errorMessage));
   }
 }
