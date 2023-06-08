@@ -88,6 +88,7 @@ export class BooksComponent implements OnInit {
     this.bookS.getBookById(idBook).subscribe(data=>{
       this.dataBookReserve  = data;
       this.idBook = data[0].idBook;
+      this.getAllEmployees();
     });
   }
 

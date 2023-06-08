@@ -31,7 +31,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let rack of racks | rack:filterName">
+            <tr *ngFor="let rack of (racks | rack:filterName) | paginate : { itemsPerPage: 10, currentPage: p };">
               <td>{{rack.idRack}}</td>
               <td>{{rack.nameRack}}</td>
               <td>{{rack.levels}}</td>
@@ -46,6 +46,11 @@
             </tr>
           </tbody>
         </table>
+        <pagination-controls
+        (pageChange)="p = $event"
+        previousLabel="Before"
+        nextLabel="After"
+      ></pagination-controls>
       </div>
     </div>
   </div>

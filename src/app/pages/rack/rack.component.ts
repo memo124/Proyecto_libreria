@@ -16,6 +16,7 @@ export class RackComponent implements OnInit {
   public formRack: FormGroup;
   public dataRack: rackI;
   public idRack: number = 0;
+  public p: number = 1;
 
   constructor(public rackS:RackService, private helper:classHelper){
     this.formRack = new FormGroup({

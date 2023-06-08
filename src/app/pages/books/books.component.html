@@ -191,12 +191,18 @@ aria-hidden="true"
               </div>
             </div>
            <div *ngFor="let user of userData">
-            <div class="row" style="padding-bottom: 15px;">
-              <div class="col-4"><b>Name user: </b>{{user.nameUser}}</div>
-              <div class="col-5"><b>Email: </b>{{user.emailUser}}</div>
-              <div class="col-3"><b>Phone: </b>{{user.phoneUser}}</div>
+              <div class="row" style="padding-bottom: 15px;">
+                <div class="col-4"><b>Name user: </b>{{user.nameUser}}</div>
+                <div class="col-5"><b>Email: </b>{{user.emailUser}}</div>
+                <div class="col-3"><b>Phone: </b>{{user.phoneUser}}</div>
+                <div class="col-4">
+                  <label for="idEmployee" class="form-label"><b>Employee</b></label>
+                  <select name="idEmployee" id="idEmployee" class="form-control" [(ngModel)]="cbEmployees">
+                    <option value="{{employee.idEmployee}}" *ngFor="let employee of employees">{{employee.nameEmployee}}</option>
+                  </select>
+                </div>
+              </div>
             </div>
-          </div>
            </div>
         </div>
       </div>

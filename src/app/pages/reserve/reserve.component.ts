@@ -25,6 +25,7 @@ export class ReserveComponent  implements OnInit {
   public filterName: string = "";
   public formReserve: FormGroup;
   public idReserve: number = 0;
+  public idEmploye: number = 0;
 
   constructor(private helper:classHelper,private userS:UserService,private employeeS:EmployeeService,private bookS:BooksService,private reserveS:ReserveService){
     this.formReserve = new FormGroup({
