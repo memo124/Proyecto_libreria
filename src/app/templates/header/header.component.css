@@ -9,3 +9,8 @@
 .boton{
   background-color: #FFB74D;
 }
+
+.d-Flex-Center{
+  display: flex;
+  align-items: center;
+}
