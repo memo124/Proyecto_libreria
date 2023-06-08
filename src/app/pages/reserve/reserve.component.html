@@ -31,7 +31,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let reserve of reserves | reserve:filterName">
+            <tr *ngFor="let reserve of (reserves | reserve:filterName) | paginate : { itemsPerPage: 10, currentPage: p };">
               <td>{{reserve.idReserve}}</td>
               <td>{{reserve.User.nameUser}}</td>
               <td>{{reserve.dateReservation | date:'dd-MM-yyyy'}}</td>
@@ -45,6 +45,11 @@
             </tr>
           </tbody>
         </table>
+        <pagination-controls
+        (pageChange)="p = $event"
+        previousLabel="Before"
+        nextLabel="After"
+      ></pagination-controls>
       </div>
     </div>
   </div>

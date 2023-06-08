@@ -47,6 +47,7 @@ export class BooksComponent implements OnInit {
   public idEmploye: number = 0;
   public reserve: FormGroup;
   public idusuario:string = "";
+  public fecha: string = "";
 
   constructor(private reserveS:ReserveService,private employeeS:EmployeeService,private userS:UserService,private helper:classHelper,private rackS:RackService,private editorialS:EditorialService,private sanitizer: DomSanitizer, private bookS:BooksService,private authorS:AuthorService,private genreS:GenreService) {
     this.reserve = new FormGroup({
@@ -65,8 +66,8 @@ export class BooksComponent implements OnInit {
     });
   }
 
-  sendReserve(idUser:number,idBook:number,idEmployee:number):void {
-    let array = {'idUser':idUser, 'idBook':idBook, 'idEmployee':idEmployee};
+  sendReserve(fecha:string,idUser:number,idBook:number,idEmployee:number):void {
+    let array = {'idUser':idUser, 'idBook':idBook, 'idEmployee':idEmployee,'dateReservation':fecha};
     this.reserveS.postReserve(array).subscribe(data=>{
       this.helper.messageAlert('Successfully',data.response,'success','Accepted');
     });

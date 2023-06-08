@@ -19,7 +19,7 @@ export class ReserveService {
   };
 
   getReserves():Observable<reserveI[]>{
-    let direction = `${environment.uri}Reserve`;
+    let direction = `${environment.uri}Reserve?page=1&limit=100&actives=false`;
     return this.http.get<reserveI[]>(direction, this.httpOptions);
   }
 
