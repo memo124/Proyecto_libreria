@@ -23,12 +23,12 @@
     <div class="row" *ngFor="let book of (books|book:filterName) | paginate : { itemsPerPage: 7, currentPage: p };">
       <div class="card description" >
         <div class="row">
-          <div class="col-4">Title:{{book.bookName}}</div>
-          <div class="col-4">Genre:{{book.Genre.nameGenre}}</div>
+          <div class="col-4"><strong>Title:</strong> {{book.bookName}}</div>
+          <div class="col-4"><strong>Genre:</strong> {{book.Genre.nameGenre}}</div>
         </div>
         <div class="row">
-          <div class="col-4">Author:{{book.Author.nameAuthor}}</div>
-          <div class="col-4">Editorial:{{book.Editorial.nameEditorial}}</div>
+          <div class="col-4">Author: {{book.Author.nameAuthor}}</div>
+          <div class="col-4">Editorial: {{book.Editorial.nameEditorial}}</div>
           <div class="col-4">
             <div class="row">
               <div class="col">
