@@ -46,6 +46,7 @@ export class BooksComponent implements OnInit {
   public base64:any;
   public idEmploye: number = 0;
   public reserve: FormGroup;
+  public idusuario:string = "";
 
   constructor(private reserveS:ReserveService,private employeeS:EmployeeService,private userS:UserService,private helper:classHelper,private rackS:RackService,private editorialS:EditorialService,private sanitizer: DomSanitizer, private bookS:BooksService,private authorS:AuthorService,private genreS:GenreService) {
     this.reserve = new FormGroup({
@@ -72,6 +73,8 @@ export class BooksComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let arrtoken = JSON.parse(this.helper.b64_to_utf8());
+    this.idusuario =arrtoken.userName;
     this.getAllBooks();
   }
 
@@ -129,7 +132,6 @@ export class BooksComponent implements OnInit {
   searchUser(){
     this.userS.getUserById(this.carnet).subscribe(data=>{
       this.userData = data;
-      this.getAllEmployees();
     });
   }
 

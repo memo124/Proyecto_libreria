@@ -19,6 +19,9 @@ import { RackPipe } from './pipes/rack/rack.pipe';
 import { ReservePipe } from './pipes/reserve/reserve.pipe';
 import { UserPipe } from './pipes/user/user.pipe';
 import { LoginGuard } from './pages/login/login.guard';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { Error404Component } from './error/error404/error404.component';
+
 
 const routes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -30,7 +33,10 @@ const routes: Routes = [
   {path:'rack',component:RackComponent,canActivate:[LoginGuard]},
   {path:'reserve',component:ReserveComponent,canActivate:[LoginGuard]},
   {path:'user',component:UserComponent,canActivate:[LoginGuard]},
-  {path:'author',component:AuthorComponent,canActivate:[LoginGuard]}
+  {path:'author',component:AuthorComponent,canActivate:[LoginGuard]},
+  {path:'dashboard',component:DashboardComponent,canActivate:[LoginGuard]},
+  {path:'error404',component:Error404Component},
+  {path:'**', redirectTo:'/error404'}
 ];
 
 @NgModule({
@@ -38,5 +44,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-export const routingComponents = [LoginComponent,BooksComponent,AuthorComponent,EditorialComponent,EmployeeComponent,GenreComponent,RackComponent,ReserveComponent,UserComponent]
+export const routingComponents = [LoginComponent,BooksComponent,AuthorComponent,EditorialComponent,EmployeeComponent,GenreComponent,RackComponent,ReserveComponent,UserComponent,DashboardComponent]
 export const pipes = [GenrePipe,AuthorPipe,BookPipe,EditorialPipe,EmployeePipe,RackPipe,ReservePipe,UserPipe]

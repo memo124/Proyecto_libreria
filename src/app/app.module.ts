@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from "@angular/common/http";
 import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Error404Component } from './error/error404/error404.component';
 
 
 
@@ -20,7 +21,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     routingComponents,
     HeaderComponent,
     FooterComponent,
-    pipes
+    pipes,
+    Error404Component
   ],
   imports: [
     BrowserModule,

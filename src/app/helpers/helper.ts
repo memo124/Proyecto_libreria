@@ -13,6 +13,14 @@ export class classHelper {
       return (status == true) ? 'Active' : 'Inactive';
     }
 
+    public b64_to_utf8() {
+      let tok:any = '';
+      let valor:any = null;
+      tok = localStorage.getItem("token");
+      valor = tok.split('.',2);
+      return window.atob(valor[1]);
+    }
+
     public messageAlert(titleM:string,messageM:string,iconM:any,buttonM:string):void{
       Swal.fire({
         title: titleM,
@@ -23,7 +31,7 @@ export class classHelper {
     }
 
     public isAuthenticated():boolean{
-        return localStorage.getItem("token") != '';
+        return localStorage.getItem("token") != undefined && localStorage.getItem("token") != '';
     }
 
     public validateSting(): string{
